@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 import axios from "axios"
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 interface User {
   id: string;
@@ -11,6 +13,9 @@ interface User {
 
 const App: React.FC = () => {
   
+  const session = useSession()
+  const router = useRouter()
+
   const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<User[]>([]);
@@ -33,8 +38,17 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log(session?.status)
+    if (session?.status !== 'authenticated') {
+      router.push('/')
+    }
+  }, [session?.status, router])
+
+  useEffect(() => {
     fetchUsers();
   }, []);
+
+
 
   return (
     <div className='mt-11' >

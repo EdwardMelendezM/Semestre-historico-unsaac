@@ -5,14 +5,14 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import ItemUser from "./ItemUser";
 
 const UserConstituyente = () => {
 
-  const session = useSession() || null
+  const session = useSession()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,7 +35,6 @@ const UserConstituyente = () => {
       }
     })
 
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!data.email || !data.password) return
     setIsLoading(true)
@@ -52,6 +51,14 @@ const UserConstituyente = () => {
     }
 
   }
+
+
+  useEffect(() => {
+    console.log(session?.status)
+    if (session?.status !== 'authenticated') {
+      router.push('/')
+    }
+  }, [session?.status, router])
 
   return ( 
     <div className="mt-11 px-8 py-6 grid grid-cols-1 lg:grid-cols-2">

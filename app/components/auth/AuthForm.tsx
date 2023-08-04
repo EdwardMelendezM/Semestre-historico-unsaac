@@ -1,16 +1,14 @@
 'use client'
 
-import axios from 'axios'
 import Button from "@/app/components/Button";
 import Input from "@/app/components/Input";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import { toast } from 'react-hot-toast' 
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation';
 
-type variant = 'LOGIN' | 'REGISTER'
 
 //@ts-ignore
 const AuthForm = () => {
@@ -19,8 +17,8 @@ const AuthForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (session?.status === 'unauthenticated') {
-      router.push('/dasboard')
+    if (session?.status === 'authenticated') {
+      router.push('/administrador')
     }
   }, [session?.status, router])
 
@@ -47,15 +45,15 @@ const AuthForm = () => {
     })
       .then((callback) => {
         if (callback?.error) {
+          console.log(callback?.error)
           toast.error('El usuario no existe')
         }
         if (callback?.ok && !callback?.error) {
           toast.success('¡Entro correctamente!')
-          router.push('/')
+          router.push('/administrador')
         }
       })
       .finally(() => setIsLoading(false))
-    
   }
 
   return (
@@ -79,8 +77,8 @@ const AuthForm = () => {
         >
           <Input
             id="email"
-            label="Correo"
-            type="email"
+            label="Codigo"
+            type="text"
             register={register}
             errors={errors}
             disabled={isLoading}
