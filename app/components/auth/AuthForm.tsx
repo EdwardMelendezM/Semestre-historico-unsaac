@@ -37,7 +37,7 @@ const AuthForm = () => {
     })
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    if(!data.email || !data.password) return 
+    if (!data.email || !data.password) return 
     setIsLoading(true)
     signIn('credentials', {
       ...data,

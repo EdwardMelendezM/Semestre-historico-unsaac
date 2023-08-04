@@ -19,9 +19,9 @@ export const authOptions: AuthOptions = {
           throw new Error('Invalid credentials');
         }
 
-        const user = await prisma.user.findUnique({
+        const user = await prisma.user.findFirst({
           where: {
-            email: credentials.email
+            codigo: credentials.email
           }
         });
 
@@ -33,7 +33,6 @@ export const authOptions: AuthOptions = {
           credentials.password,
           user.hashedPassword
         );
-        console.log(user)
         if (!isCorrectPassword) {
           throw new Error('Invalid credentials');
         }

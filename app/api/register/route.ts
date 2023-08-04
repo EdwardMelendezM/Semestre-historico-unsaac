@@ -11,7 +11,7 @@ export async function POST(
   const {
     codigo,
     name,
-    password
+    password,
   } = body;
 
   console.log(body)
@@ -23,7 +23,8 @@ export async function POST(
     data: {
       codigo,  
       name,
-      hashedPassword
+      hashedPassword,
+      email: codigo
     }
   });
 
