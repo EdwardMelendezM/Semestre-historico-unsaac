@@ -26,8 +26,8 @@ model User {
   cargo           String?
   fechaGrado      DateTime?
   fechaCapacitacion DateTime?
-  lugarCapacitacion DateTime? 
-  denominacioncapacitacion DateTime? 
+  lugarCapacitacion DateTime?
+  denominacioncapacitacion DateTime?
   semestre          Int?
   codigo          String?
   // conversationIds String[] @db.ObjxxectId
