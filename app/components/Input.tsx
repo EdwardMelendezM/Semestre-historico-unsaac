@@ -15,6 +15,7 @@ interface InputProps {
   register: UseFormRegister<FieldValues>
   errors: FieldErrors
   disabled?: boolean
+  placeholder?:string
 
 }
 
@@ -25,9 +26,10 @@ const Input: React.FC<InputProps> = ({
   required,
   register,
   errors,
-  disabled
-
+  disabled,
+  placeholder,
 }) => {
+
   return (
     <div>
       <label
@@ -44,12 +46,14 @@ const Input: React.FC<InputProps> = ({
       </label>
       <div className="mt-2">
         <input
+          placeholder={placeholder}
           id={id}
           type={type}
           autoComplete={id}
           disabled={disabled}
           {...register(id, { required })}
           className={clsx(`
+            px-3
             form-input
             block
             w-full

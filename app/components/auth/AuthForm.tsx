@@ -12,26 +12,18 @@ import { useRouter } from 'next/navigation';
 
 type variant = 'LOGIN' | 'REGISTER'
 
+//@ts-ignore
 const AuthForm = () => {
   const session = useSession() || null
   const router = useRouter()
-  const [variant, setVariant] = useState<variant>('LOGIN')
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (session?.status === 'authenticated') {
-      console.log('Authenticated');
-      router.push('/users')
+    if (session?.status === 'unauthenticated') {
+      router.push('/dasboard')
     }
   }, [session?.status, router])
 
-  const toogleVariant = useCallback(() => {
-    if (variant === 'LOGIN') {
-      setVariant('REGISTER')
-    } else {
-      setVariant('LOGIN')
-    }
-  }, [variant])
 
 
   const {
@@ -41,50 +33,29 @@ const AuthForm = () => {
       errors
     } } = useForm<FieldValues>({
       defaultValues: {
-        name: '',
         email: '',
         password: ''
       }
     })
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if(!data.email || !data.password) return 
     setIsLoading(true)
-    if (variant === 'REGISTER') {
-      axios.post('/api/register', data)
-        .then(() => signIn('credentials', data))
-        .catch(() => toast.error('Something wnet wrong!'))
-        .finally(() => setIsLoading(false))
-    }
-    if (variant === 'LOGIN') {
-      signIn('credentials', {
-        ...data,
-        redirect: false
-      })
-        .then((callback) => {
-          if (callback?.error) {
-            toast.error('Invalid Credentials')
-          }
-          if (callback?.ok && !callback?.error) {
-            toast.success('Logged in!')
-            router.push('/users')
-          }
-        })
-        .finally(() => setIsLoading(false))
-    }
-  }
-
-  const socialAction = (action: string) => {
-    setIsLoading(true)
-    signIn(action, { redirect: false })
-      .then(callback => {
+    signIn('credentials', {
+      ...data,
+      redirect: false
+    })
+      .then((callback) => {
         if (callback?.error) {
-          toast.error('Invalid Credentials')
+          toast.error('El usuario no existe')
         }
         if (callback?.ok && !callback?.error) {
-          toast.error('Logged in!')
+          toast.success('¡Entro correctamente!')
+          router.push('/')
         }
       })
       .finally(() => setIsLoading(false))
+    
   }
 
   return (
@@ -106,21 +77,9 @@ const AuthForm = () => {
           className="space-y-6"
           onSubmit={handleSubmit(onSubmit)}
         >
-          {
-            variant === 'REGISTER' && (
-              <Input
-                id="name"
-                label="Name"
-                register={register}
-                errors={errors}
-                disabled={isLoading}
-
-              />
-            )
-          }
           <Input
             id="email"
-            label="Email"
+            label="Correo"
             type="email"
             register={register}
             errors={errors}
@@ -129,7 +88,7 @@ const AuthForm = () => {
           />
           <Input
             id="password"
-            label="Password"
+            label="Contraseña"
             type="password"
             register={register}
             errors={errors}
@@ -142,7 +101,7 @@ const AuthForm = () => {
               fullWidth
               type="submit"
             >
-              {variant === 'LOGIN' ? 'Sign in' : 'Register'}
+              Entrar
             </Button>
           </div>
         </form>
@@ -161,21 +120,13 @@ const AuthForm = () => {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="bg-white px-2 text-gray-500">
-                Or continue with
+                Inicio seguro
               </span>
             </div>
           </div>
         </div>
         <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
-          <div>
-            {variant === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}
-          </div>
-          <div
-            onClick={toogleVariant}
-            className="underline cursor-pointer"
-          >
-            {variant === 'LOGIN' ? 'Create an account' : 'Login'}
-          </div>
+          
         </div>
       </div>
 

@@ -21,9 +21,9 @@ const Home = () => {
 
         <Image
           alt="Logo"
-          height={"48"}
-          width={"48"}
-          className="mx-auto w-auto"
+          height={"400"}
+          width={"400"}
+          className="mx-auto w-48"
           src={"/images/unsaac.png"}
         />
         <h2 className="
