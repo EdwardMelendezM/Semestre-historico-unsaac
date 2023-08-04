@@ -24,7 +24,7 @@ const Home = () => {
           height={"48"}
           width={"48"}
           className="mx-auto w-auto"
-          src={"/images/logo.png"}
+          src={"/images/unsaac.png"}
         />
         <h2 className="
           mt-6
