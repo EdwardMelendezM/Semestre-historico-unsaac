@@ -10,15 +10,19 @@ export async function POST(
   try {
     
     const body = await request.json()
-    const { codigo,name,role,matriculado,estado}= body;
+    const { name
+     
 
-    const alumno = await prisma.user.create({
-      data:{
-        codigo,name,role,matriculado
+
+     }= body;
+
+    const semestre = await prisma.user.create({
+      data:{ name
+       
       }
     })
 
-    return NextResponse.json(alumno)
+    return NextResponse.json(semestre)
 
 
   } catch (error) {
