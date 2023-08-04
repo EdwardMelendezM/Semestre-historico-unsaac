@@ -13,21 +13,69 @@ interface State {
   selectedOption: string;
 }
 
-const Select: React.FC = () => {
+interface SelectProps{
+  type: "ALUMNOS" | "ALUMNOS_EGRESADOS" | "ALUMNOS_GRADUADO"
+}
+
+const Select: React.FC<SelectProps> = ({type}) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [state, setState] = useState<State>({
-    options: [],
+    options: [
+      {
+        id:1,
+        name:"2023-I"
+      },
+      {
+        id: 2,
+        name: "2022-II"
+      },
+      {
+        id: 3,
+        name: "2022-I"
+      },
+  ],
     selectedOption: '',
   });
 
-  useEffect(() => {
-    // axios.get<Option[]>('/api/semestre')
-    //   .then((response) => {
-    //     setState((prev) => ({ ...prev, options: response.data }));
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error fetching data:', error);
-    //   });
-  }, []);
+  // API DE DESCARGAR
+  const downloadFile= async ()=>{
+    setIsLoading(true)
+    if (type ==="ALUMNOS"){
+      const file = await axios.get('/api/semestreALumno')
+        .then((response) => {
+
+        })
+        .catch((error) => {
+          console.error('Error, no existe este archivo:', error);
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    } else if (type === "ALUMNOS_EGRESADOS"){
+      const file = await axios.get('/api/semestreEgresado')
+        .then((response) => {
+
+        })
+        .catch((error) => {
+          console.error('Error, no existe este archivo:', error);
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    } else if (type === "ALUMNOS_GRADUADO") {
+      const file = await axios.get('/api/semestreGraduado')
+        .then((response) => {
+
+        })
+        .catch((error) => {
+          console.error('Error, no existe este archivo:', error);
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    }
+   
+  }
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setState((prev) => ({ ...prev, selectedOption: event.target.value }));
@@ -50,6 +98,7 @@ const Select: React.FC = () => {
         ))}
       </select>
       <Button
+        disabled={isLoading}
         onClick={()=>{}}
       >
         Generar

@@ -8,8 +8,12 @@ const getCurrentUser = async () => {
 
     //Verificamos si existe el usuario de session
     if (!session?.user?.email) {
+      console.log("Session de usuario")
+      console.log(session)
+
       return null;
     }
+    
 
     //Buscamos el actual usuario
     const currentUser = await prisma.user.findUnique({
