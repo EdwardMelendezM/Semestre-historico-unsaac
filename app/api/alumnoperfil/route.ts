@@ -7,7 +7,7 @@ export async function GET(
   request: Request,
 ) {
   try {
-    const currentUser = await getCurrentUser();
+    // const currentUser = await getCurrentUser();
     const body = await request.json();
     const {
       id, 
