@@ -29,6 +29,7 @@ model User {
   lugarCapacitacion DateTime? 
   denominacioncapacitacion DateTime? 
   semestre          Int? 
+  codigo            String?
   // conversationIds String[] @db.ObjxxectId
   // conversations Conversation[] @relation(fields: [conversationIds], references: [id])
   

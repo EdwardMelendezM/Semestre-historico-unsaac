@@ -7,17 +7,23 @@ export async function GET(
   request: Request,
 ) {
   try {
-    const currentUser = await getCurrentUser();
     const body = await request.json();
     const {
-      id, 
-      nombre,
-      rol,
+      codigo, 
     } = body;
 
-    return NextResponse.json(body)
+    const alumno = await prisma.user.findFirst(
+      
+      {
+        where:{
+          codigo
+        }
+      }
+    )
+
+    return NextResponse.json(alumno)
   } catch (error) {
     console.log(error, 'ERROR_MESSAGES')
-    return new NextResponse('Error', { status: 400  });
+    return new NextResponse('Error', { status: 400 });
   }
 }
