@@ -1,6 +1,6 @@
 'use client'
 
-import { useParams, usePathname } from "next/navigation"
+import { useParams, usePathname, useRouter } from "next/navigation"
 import Link from "next/link";
 import { cn } from "@/app/libs/utils";
 
@@ -14,47 +14,22 @@ export function MainNav({
 
   const pathname = usePathname();
   const params = useParams();
+  const router = useRouter()
 
   const routes = [
     {
-      href: `/${params.storeId}/`,
-      label: 'Overview',
-      active: pathname === `/${params.storeId}`
+      href: `https://www.unsaac.edu.pe/`,
+      label: 'Unsaac Oficial',
     },
     {
-      href: `/${params.storeId}/billboards`,
-      label: 'Billboards',
+      href: `http://ccomputo.unsaac.edu.pe/`,
+      label: 'Centro de computo ',
       active: pathname === `/${params.storeId}/billboards`
     },
     {
-      href: `/${params.storeId}/categories`,
-      label: 'Categories',
-      active: pathname === `/${params.storeId}/categories`
-    },
-    {
-      href: `/${params.storeId}/sizes`,
-      label: 'Sizes',
-      active: pathname === `/${params.storeId}/sizes`
-    },
-    {
-      href: `/${params.storeId}/colors`,
-      label: 'Colors',
-      active: pathname === `/${params.storeId}/colors`
-    },
-    {
-      href: `/${params.storeId}/products`,
-      label: 'Products',
-      active: pathname === `/${params.storeId}/products`
-    },
-    {
-      href: `/${params.storeId}/orders`,
-      label: 'Orders',
-      active: pathname === `/${params.storeId}/orders`
-    },
-    {
-      href: `/${params.storeId}/settings`,
-      label: 'Settings',
-      active: pathname === `/${params.storeId}/settings`
+      href: `/administrador/historial`,
+      label: 'Historial',
+      active: pathname === `/${params.storeId}/billboards`
     }
   ]
 
@@ -62,11 +37,17 @@ export function MainNav({
     <nav
       className={cn('flex items-center space-x-4 lg:space-x-6', className)}
     >
+      <img
+        src="images/unsaacPlaceholder.jpg"
+        alt="Logo unsaac"
+        className="hidden sm:block rounded-2xl h-16 pt-3 hover:cursor-pointer hover:opacity-80 transition"
+        onClick={() => router.push("/")}
+      />
       {routes.map((route) => (
         <Link
           key={route.href}
           href={route.href}
-          className={cn('text-sm font-medium transition-colors hover:text-primary')}
+          className={cn('text-sm font-medium transition-colors hover:text-primary hover:opacity-80')}
         >
           {route.label}
         </Link>

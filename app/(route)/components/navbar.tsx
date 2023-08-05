@@ -3,19 +3,9 @@
 import { signOut } from "next-auth/react";
 import { MainNav } from "./main-nav";
 import Button from "@/app/components/Button";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  const router = useRouter()
 
-  // const [isMounted, setIsMounted] = useState(false);
-
-  // useEffect(()=>{
-  //   setIsMounted(true)
-  // },[])
-
-  // if(!isMounted) return null
 
   return (
     <div className="border-b">

@@ -38,13 +38,15 @@ const UserConstituyente: React.FC<UserConstituyenteProps> = ({
     <div className="mt-11 px-8 py-6 grid grid-cols-1 lg:grid-cols-2">
       <div className="flex flex-col gap-y-4 items-center justify-center">
         <div className="relative">
-          <Image
-            src={currentUser?.image ||"/images/placeholder.jpg"}
-            alt="placeholbeder"
-            width={"244"}
-            height={"244"}
-            className="rounded-full"
-          />
+          <div className="w-44 h-44 overflow-hidden rounded-[100%]">
+            <Image
+              src={currentUser?.image || "/images/placeholder.jpg"}
+              alt="placeholbeder"
+              width={"244"}
+              height={"244"}
+              className="w-auto bg-cover"
+            />
+          </div>
           
           <Image
             src="/images/edit.svg"
@@ -62,21 +64,27 @@ const UserConstituyente: React.FC<UserConstituyenteProps> = ({
           Editar
         </Button>
       </div>  
-      <div className="flex items-start justify-start gap-y-4 rounded-xl bg-gray-300 flex-col px-11 py-6 mt-6">
-        <div className="mt-8 text-gray-700 font-bold text-xl ">
+      <div className="flex items-start justify-start gap-y-4 rounded-xl bg-gray-300 flex-col  px-6 sm:px-11 py-5 sm:py-6 mt-6 mb-2">
+        <div className="mt-4 text-gray-700 font-bold text-xl ">
           Datos personales
         </div>
         <ItemUser label="Nombre" text={currentUser?.name} />
         <ItemUser label="Codigo" text={currentUser?.codigo} />
         <ItemUser label="Rol" text={currentUser?.typeRole} />
-        <ItemUser label="Titulo" text={currentUser?.titulos} />
-        <ItemUser label="Lugar" text={currentUser?.lugar} />
-        <ItemUser label="Area" text={currentUser?.area} />
-        <ItemUser label="Cargo" text={currentUser?.cargo} />
-        <ItemUser label="Fecha de grado" text={currentUser?.fechaGrado} />
-        <ItemUser label="Lugar Capacitacion" text={currentUser?.lugarCapacitacion} />
-        <ItemUser label="Denominacion de capacitacion" text={currentUser?.denominacioncapacitacion} />
-        <ItemUser label="Matriculado" text={currentUser?.matriculado} />
+        {
+          currentUser?.typeRole!=="Estudiante" && (
+            <>
+              <ItemUser label="Titulo" text={currentUser?.titulos} />
+              <ItemUser label="Lugar" text={currentUser?.lugar} />
+              <ItemUser label="Area" text={currentUser?.area} />
+              <ItemUser label="Cargo" text={currentUser?.cargo} />
+              <ItemUser label="Fecha de grado" text={currentUser?.fechaGrado} />
+              <ItemUser label="Lugar Capacitacion" text={currentUser?.lugarCapacitacion} />
+              <ItemUser label="Denominacion de capacitacion" text={currentUser?.denominacioncapacitacion} />
+              <ItemUser label="Matriculado" text={currentUser?.matriculado} />
+            </>
+          )
+        }
 
       </div>
     </div>

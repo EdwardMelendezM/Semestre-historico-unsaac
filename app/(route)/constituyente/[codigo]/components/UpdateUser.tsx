@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { format } from 'date-fns'
 import { CldUploadButton } from "next-cloudinary";
 
 
@@ -26,7 +25,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
   
   const {
     register,
-    handleSubmit,
+    handleSubmit, 
     setValue,
     watch,
     formState: {
@@ -68,10 +67,10 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
         fechaCapacitacion: new Date(data.fechaCapacitacion)
       })
       router.refresh()
-      router.push(`/constituyente`)
       toast.success("Actualizado correctamente")
+      router.push(`/constituyente`)
     } catch (error) {
-      toast.error('Something went wrong')
+      toast.error('Algo ha salido mal')
     } finally {
       setIsLoading(false)
     }
@@ -87,13 +86,17 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
   return (
     <div className="mt-11 px-8 py-6 flex flex-col gap-y-4 items-center justify-center">
       <div className="relative">
-        <Image
-          src={image || currentUser?.image ||"/images/placeholder.jpg"}
-          alt="placeholbeder"
-          width={"244"}
-          height={"244"}
-          className="rounded-full"
-        />
+
+        <div className="w-60 h-60  overflow-hidden rounded-[100%]">
+          <Image
+            src={image || currentUser?.image || "/images/placeholder.jpg"}
+            alt="placeholbeder"
+            width={"244"}
+            height={"244"}
+            className="rounded-full bg-cover bg-center"
+          />
+        </div>
+        
         <CldUploadButton
           options={{ maxFiles: 1 }}
           onUpload={handleUpload}
@@ -104,7 +107,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
             alt="placeholbeder"
             width={"48"}
             height={"48"}
-            className="rounded-full bg-slate-400 p-2 absolute bottom-0 right-0 hover:cursor-pointer hover:bg-slate-300 transition"
+            className="rounded-full bg-slate-400 p-2 absolute bottom-0 right-0 hover:cursor-pointer hover:bg-slate-300 transition bg-cover"
           />
         </CldUploadButton>
         
@@ -146,7 +149,6 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
                   register={register}
                   errors={errors}
                   disabled={isLoading}
-                  value={currentUser?.titulos}
                 />
                 <Input
                   id="grados"
@@ -155,7 +157,6 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
                   register={register}
                   errors={errors}
                   disabled={isLoading}
-                  value={currentUser?.grados}
                 />
                 <Input
                   id="lugarCapacitacion"
@@ -164,7 +165,6 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
                   register={register}
                   errors={errors}
                   disabled={isLoading}
-                  value={currentUser?.lugar}
                 />
                 <Input
                   id="area"
@@ -173,7 +173,6 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
                   register={register}
                   errors={errors}
                   disabled={isLoading}
-                  value={currentUser?.area}
                 />
                 <Input
                   id="cargo"
@@ -182,7 +181,6 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
                   register={register}
                   errors={errors}
                   disabled={isLoading}
-                  value={currentUser?.cargo}
                 />
                 <Input
                   id="fechaGrado"
@@ -191,7 +189,6 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
                   register={register}
                   errors={errors}
                   disabled={isLoading}
-                  value={currentUser?.fechaGrado}
                 />
                 <Input
                   id="fechaCapacitacion"
@@ -200,7 +197,6 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
                   register={register}
                   errors={errors}
                   disabled={isLoading}
-                  value={currentUser?.fechaCapacitacion}
                 />
                 <Input
                   id="denominacioncapacitacion"
@@ -209,7 +205,6 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
                   register={register}
                   errors={errors}
                   disabled={isLoading}
-                  value={currentUser?.denominacioncapacitacion}
                 />
               </>
             )
