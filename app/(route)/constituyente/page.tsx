@@ -1,4 +1,3 @@
-import prisma from "@/app/libs/prismadb"
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import Heading from "../components/heading";
 import UserConstituyente from "./components/UserConstituyente";

@@ -59,7 +59,7 @@ const UserConstituyente: React.FC<UserConstituyenteProps> = ({
           Editar
         </Button>
       </div>  
-      <div className="flex items-start justify-start gap-y-4 rounded-xl bg-gray-300 flex-col px-11 py-6">
+      <div className="flex items-start justify-start gap-y-4 rounded-xl bg-gray-300 flex-col px-11 py-6 mt-6">
         <div className="mt-8 text-gray-700 font-bold text-xl ">
           Datos personales
         </div>

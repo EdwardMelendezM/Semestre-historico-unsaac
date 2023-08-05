@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { format } from 'date-fns'
 
 
 
@@ -29,13 +30,13 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
       errors
     } } = useForm<FieldValues>({
       defaultValues: {
-        titulo: currentUser?.titulos || "",
-        grado: currentUser?.grados || "",
+        titulos: currentUser?.titulos || "",
+        grados: currentUser?.grados || "",
         lugar: currentUser?.lugar ||"",
         area: currentUser?.area ||"",
         cargo: currentUser?.cargo ||"",
-        fechaGrado: currentUser?.fechaGrado ||"",
-        fechaCapacitacion: currentUser?.fechaCapacitacion ||"",
+        fechaGrado: currentUser?.fechaGrado ||null,
+        fechaCapacitacion: currentUser?.fechaCapacitacion || null,
         lugarCapacitacion: currentUser?.lugarCapacitacion ||"",
         denominacioncapacitacion: currentUser?.denominacioncapacitacion ||"",
       }
@@ -46,10 +47,14 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
     setIsLoading(true)
     console.log(data)
     try {
-      // setIsLoading(true)
-      // await axios.patch(`/api/users`, data)
-      // router.refresh()
-      // router.push(`/api/users`)
+      setIsLoading(true)
+      await axios.post(`/api/alumno/actualizar/${currentUser?.codigo}`, {
+        ...data,
+        fechaGrado: new Date(data.fechaGrado),
+        fechaCapacitacion: new Date(data.fechaCapacitacion)
+      })
+      router.refresh()
+      router.push(`/constituyente`)
       toast.success("Actualizado correctamente")
     } catch (error) {
       toast.error('Something went wrong')
@@ -102,7 +107,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
           />
 
           <Input
-            id="titulo"
+            id="titulos"
             label="Titulo"
             type="text"
             register={register}
@@ -111,7 +116,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
             value={currentUser?.titulos}
           />
           <Input
-            id="grado"
+            id="grados"
             label="Grado"
             type="text"
             register={register}
@@ -120,7 +125,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
             value={currentUser?.grados}
           />
           <Input
-            id="lugar"
+            id="lugarCapacitacion"
             label="lugar"
             type="text"
             register={register}
@@ -149,7 +154,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
           <Input
             id="fechaGrado"
             label="Fecha de grado"
-            type="date"
+            type="datetime-local"
             register={register}
             errors={errors}
             disabled={isLoading}
@@ -158,14 +163,14 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
           <Input
             id="fechaCapacitacion"
             label="Fecha de ultima capacitacion"
-            type="date"
+            type="datetime-local"
             register={register}
             errors={errors}
             disabled={isLoading}
             value={currentUser?.fechaCapacitacion}
           />
           <Input
-            id="denominacionCapacitacion"
+            id="denominacioncapacitacion"
             label="Denominaicon de ultima capacitacion"
             type="text"
             register={register}
