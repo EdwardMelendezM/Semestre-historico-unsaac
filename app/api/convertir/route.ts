@@ -1,51 +1,47 @@
 import prisma from "@/app/libs/prismadb";
+import { NextResponse } from "next/server";
 import xlsx from 'xlsx';
-
+import bcrypt from "bcrypt";
+import { json } from "stream/consumers";
 interface UserExcelData {
-  name: string;
-  titulo: string;
+  name:string;
+  codigo:string;
+  role:string;
+  typeRole:string;
+  estadoAlumno:string;
+  password:string;
+
 }
+
 
 export async function POST(request: Request) {
   try {
-    const formData = await request.formData();
-
-    const archivo = formData.get('archivo');
-
-    if (!archivo) {
-      throw new Error('No se encontró el archivo en el FormData');
-    }
-    
-    const workbook = xlsx.read(archivo);
-    console.log(workbook)
+    const archivoBuffer = await request.arrayBuffer();
+    const archivoUint8Array = new Uint8Array(archivoBuffer);
+    const workbook = xlsx.read(archivoUint8Array);
     const hoja = workbook.Sheets['Hoja 1'];
-
-    if (!hoja) {
-      return { mensaje:'No se encontró la hoja "Hoja 1" en el archivo XLSX'};
-    }
+    console.log(hoja)
+   
 
     const datosJson = xlsx.utils.sheet_to_json<UserExcelData>(hoja);
-
-    if (!datosJson || datosJson.length === 0) {
-      return { mensaje:'No se encontraron datos válidos en el archivo XLSX'};
-    }
-
+    console.log(datosJson)
     for (const dato of datosJson) {
-      if (!dato.name || !dato.titulo) {
-        return { mensaje:'Los datos del archivo XLSX son inválidos'};
-      }
-
-      await prisma.user.create({
+      const hashedPassword = await bcrypt.hash(String(dato.password), 12);
+      const body =await prisma.user.create({
         data: {
           name: dato.name,
-          titulos: dato.titulo,
+          codigo:String(dato.codigo),
+          email:String(dato.codigo),
+          role:dato.role,
+          typeRole:dato.typeRole,
+          estadoAlumno:dato.estadoAlumno,
+          hashedPassword:String(hashedPassword)
         },
       });
     }
-
-    return { mensaje: 'Datos guardados correctamente en la base de datos' };
+    return NextResponse.json({msg:"exito"})
   } catch (error) {
-    console.error('Error al procesar el archivo XLSX:', error);
-    return { mensaje:'Error al procesar el archivo XLSX'};
+    return NextResponse.json({msg:"error"},{status:500})
+  
   } 
 }
