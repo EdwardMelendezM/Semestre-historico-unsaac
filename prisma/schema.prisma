@@ -32,6 +32,7 @@ model User {
   codigo          String?  @unique
   matriculado     String?
   estadoAlumno    String?
+
   semestre Semestre[] 
   historial Historial[]
   
