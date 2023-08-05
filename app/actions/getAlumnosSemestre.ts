@@ -4,16 +4,16 @@ const getAlumnosSemestre = async ()=>{
 
   const semestre = "2023-I"
   
-  // const alumnosSemestre = await prisma.semestre.findMany({
-  //   where:{
-  //     name: semestre,
-  //   },
-  //   include:{
-  //     user:true
-  //   }
-  // })
+  const alumnosSemestre = await prisma.semestre.findMany({
+    where:{
+      name: semestre,
+    },
+    include:{
+      user:true
+    }
+  })
 
-  return null
+  return alumnosSemestre
 }
 
 export default getAlumnosSemestre

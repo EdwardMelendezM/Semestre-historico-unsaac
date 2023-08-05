@@ -27,7 +27,38 @@ export async function POST(
     return NextResponse.json(createSemestre)
 
   } catch (error) {
-    console.log('[BILLBOARDS_GET]', error);
+    console.log('[CREATE_SEMESTRE]', error);
+    return new NextResponse('Internal Error', { status: 500 })
+  }
+}
+
+export async function GET(
+  request: Request,
+  {
+    params
+  }:
+    {
+      params: { name: string }
+    }
+) {
+
+
+  try {
+    console.log(params.name)
+    const semestres = await prisma.semestre.findMany({
+      where:{
+        name: params.name
+      },
+      include:{
+        user: true
+      }
+    })
+    
+
+    return NextResponse.json(semestres)
+
+  } catch (error) {
+    console.log('[GET_SEMESTRES]');
     return new NextResponse('Internal Error', { status: 500 })
   }
 }
