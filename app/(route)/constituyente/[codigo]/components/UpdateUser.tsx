@@ -1,6 +1,7 @@
 'use client'
 import Button from "@/app/components/Button";
 import Input from "@/app/components/Input";
+import { User } from "@prisma/client";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -12,7 +13,7 @@ import { toast } from "react-hot-toast";
 
 
 interface UpdateUserProps{
-  currentUser:any
+  currentUser:User | undefined | null
 }
 
 const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
@@ -28,8 +29,8 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
       errors
     } } = useForm<FieldValues>({
       defaultValues: {
-        titulo: currentUser?.titulo || "",
-        grado: currentUser?.grado || "",
+        titulo: currentUser?.titulos || "",
+        grado: currentUser?.grados || "",
         lugar: currentUser?.lugar ||"",
         area: currentUser?.area ||"",
         cargo: currentUser?.cargo ||"",
@@ -42,20 +43,19 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    if (!data.email || !data.password) return
     setIsLoading(true)
+    console.log(data)
     try {
-      setIsLoading(true)
-      await axios.patch(`/api/users`, data)
-      router.refresh()
-      router.push(`/api/users`)
+      // setIsLoading(true)
+      // await axios.patch(`/api/users`, data)
+      // router.refresh()
+      // router.push(`/api/users`)
       toast.success("Actualizado correctamente")
     } catch (error) {
       toast.error('Something went wrong')
     } finally {
       setIsLoading(false)
     }
-
   }
 
   useEffect(() => {
@@ -87,95 +87,101 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
         Datos personales
       </div>
       <form
-        className="mt-6 grid  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4  w-3/4"
+        className="mt-6 "
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Input
-          id="name"
-          label="Nombre"
-          type="text"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-        />
+        <div className="grid  items-center justify-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-4  w-3/4 gap-y-3  px-11 py-1 mx-auto ">
+          <Input
+            id="name"
+            label="Nombre"
+            type="text"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            value={currentUser?.name}
+          />
 
-        <Input
-          id="titulo"
-          label="Titulo"
-          type="text"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-        />
-        <Input
-          id="grado"
-          label="Grado"
-          type="text"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-        />
-        <Input
-          id="lugar"
-          label="lugar"
-          type="text"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-
-        />
-        <Input
-          id="area"
-          label="Area"
-          type="text"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-
-        />
-        <Input
-          id="cargo"
-          label="Cargo"
-          type="text"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-
-        />
-        <Input
-          id="fechaGrado"
-          label="Fecha de grado"
-          type="text"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-
-        />
-        <Input
-          id="fechaCapacitacion"
-          label="Fecha de ultima capacitacion"
-          type="text"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-
-        />
-        <Input
-          id="denominacionCapacitacion"
-          label="Denominaicon de ultima capacitacion"
-          type="text"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-
-        />
-        <div>
+          <Input
+            id="titulo"
+            label="Titulo"
+            type="text"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            value={currentUser?.titulos}
+          />
+          <Input
+            id="grado"
+            label="Grado"
+            type="text"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            value={currentUser?.grados}
+          />
+          <Input
+            id="lugar"
+            label="lugar"
+            type="text"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            value={currentUser?.lugar}
+          />
+          <Input
+            id="area"
+            label="Area"
+            type="text"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            value={currentUser?.area}
+          />
+          <Input
+            id="cargo"
+            label="Cargo"
+            type="text"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            value={currentUser?.cargo}
+          />
+          <Input
+            id="fechaGrado"
+            label="Fecha de grado"
+            type="date"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            value={currentUser?.fechaGrado}
+          />
+          <Input
+            id="fechaCapacitacion"
+            label="Fecha de ultima capacitacion"
+            type="date"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            value={currentUser?.fechaCapacitacion}
+          />
+          <Input
+            id="denominacionCapacitacion"
+            label="Denominaicon de ultima capacitacion"
+            type="text"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            value={currentUser?.denominacioncapacitacion}
+          />
+        </div>
+         
+        <div className="mt-11 px-11">
           <Button
             disabled={isLoading}
             fullWidth
             type="submit"
           >
-            Entrar
+            Actualizar
           </Button>
         </div>
       </form>

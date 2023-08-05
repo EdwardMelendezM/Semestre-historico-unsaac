@@ -5,7 +5,7 @@ import UserItem from './UserItem';
 
 
 interface SearchResultsProps {
-  results: any;
+  results: any | null;
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
@@ -22,7 +22,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
             </div>
             <ul>
               {results.map((user:any) => (
-                <UserItem key={user.id} user={user} />
+                <UserItem key={user?.id} user={user} />
               ))}
             </ul>
           </div>

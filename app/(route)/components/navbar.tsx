@@ -4,16 +4,18 @@ import { signOut } from "next-auth/react";
 import { MainNav } from "./main-nav";
 import Button from "@/app/components/Button";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter()
 
-  const [isMounted, setIsMounted] = useState(false);
+  // const [isMounted, setIsMounted] = useState(false);
 
- useEffect(()=>{
-  setIsMounted(true)
- },[])
+  // useEffect(()=>{
+  //   setIsMounted(true)
+  // },[])
 
- if(!isMounted) return null
+  // if(!isMounted) return null
 
   return (
     <div className="border-b">
@@ -22,8 +24,9 @@ const Navbar = () => {
         <div className="ml-auto flex items-center space-x-4">
           <Button
             secondary
-            onClick={() => 
-            signOut()}>
+            onClick={() => {
+              signOut()
+              }}>
             Cerrar sesion
           </Button>
         </div>

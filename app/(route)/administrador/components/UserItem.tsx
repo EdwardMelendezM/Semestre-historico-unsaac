@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 interface UserItemProps{
-  user:any
+  user:any | null
 }
 
 const UserItem: React.FC<UserItemProps> = ({
@@ -24,27 +24,27 @@ const UserItem: React.FC<UserItemProps> = ({
           src={"images/placeholder.jpg"}
           className="border-full p-2"
         /> */}
-        <h2 className="text-xl text-center text-gray-600 font-bold" >{ user.name }</h2>
+        <h2 className="text-xl text-center text-gray-600 font-bold" >{ user?.name }</h2>
         <div className="grid grid-cols-2">
           <div className="flex flex-col gap-y-2 items-center justify-center ">
             {
-              user.codigo && <div className="flex gap-x-2">
-                <div className="font-semibold">Codigo:</div> {user.codigo}
+              user?.codigo && <div className="flex gap-x-2">
+                <div className="font-semibold">Codigo:</div> {user?.codigo}
               </div>
             }
             {
-              user.typeRole && <div className="flex gap-x-2">
-                <div className="font-semibold">Tipo:</div> {user.typeRole}
+              user?.typeRole && <div className="flex gap-x-2">
+                <div className="font-semibold">Tipo:</div> {user?.typeRole}
               </div>
             }
             {
-              user.estadoAlumno && <div className="flex gap-x-2">
-                <div className="font-semibold">Estado:</div> {user.estadoAlumno}
+              user?.estadoAlumno && <div className="flex gap-x-2">
+                <div className="font-semibold">Estado:</div> {user?.estadoAlumno}
               </div>
             }
           </div>
           <img
-            src={user.image ? user.image : "/images/placeholder.jpg"}
+            src={user?.image ? user?.image : "/images/placeholder.jpg"}
             alt="logito"
             className="w-48 h-48 rounded-full border-2 border-gray-500 " />
         </div>
@@ -58,10 +58,10 @@ const UserItem: React.FC<UserItemProps> = ({
         <div
           onClick={() => setIsOpen(true)}
           className="text-gray-600 hover:cursor-pointer hover:text-gray-500  truncate">
-          {user.name}
+          {user?.name}
         </div>
         <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-          {user.typeRole}
+          {user?.typeRole}
         </code>
       </div>
     </>

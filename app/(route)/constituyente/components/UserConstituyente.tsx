@@ -4,11 +4,11 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import ItemUser from "./ItemUser";
+import { User } from "@prisma/client";
 
 interface UserConstituyenteProps{
-  currentUser:any
+  currentUser: User | null;
 }
 
 const UserConstituyente: React.FC<UserConstituyenteProps> = ({
@@ -18,12 +18,20 @@ const UserConstituyente: React.FC<UserConstituyenteProps> = ({
   const session = useSession()
   const router = useRouter()
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(()=>{
+    setIsMounted(true)
+  },[])
+
   useEffect(() => {
     console.log(session?.status)
     if (session?.status !== 'authenticated') {
       router.push('/')
     }
   }, [session?.status, router])
+
+  if (!isMounted) return null
 
   return ( 
     <div className="mt-11 px-8 py-6 grid grid-cols-1 lg:grid-cols-2">
@@ -58,13 +66,13 @@ const UserConstituyente: React.FC<UserConstituyenteProps> = ({
         <ItemUser label="Nombre" text={currentUser?.name} />
         <ItemUser label="Codigo" text={currentUser?.codigo} />
         <ItemUser label="Rol" text={currentUser?.typeRole} />
-        <ItemUser label="Titulo" text={currentUser?.titulo} />
+        <ItemUser label="Titulo" text={currentUser?.titulos} />
         <ItemUser label="Lugar" text={currentUser?.lugar} />
         <ItemUser label="Area" text={currentUser?.area} />
-        <ItemUser label="Cargo" text={currentUser?.titulo} />
+        <ItemUser label="Cargo" text={currentUser?.cargo} />
         <ItemUser label="Fecha de grado" text={currentUser?.fechaGrado} />
         <ItemUser label="Lugar Capacitacion" text={currentUser?.lugarCapacitacion} />
-        <ItemUser label="Denominacion de capacitacion" text={currentUser?.denominacionCapacitacion} />
+        <ItemUser label="Denominacion de capacitacion" text={currentUser?.denominacioncapacitacion} />
         <ItemUser label="Matriculado" text={currentUser?.matriculado} />
 
       </div>
