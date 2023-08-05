@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
-import axios from "axios"
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -13,17 +12,18 @@ interface User {
 
 interface SearchUserProps{
   role:string | null | undefined
+  data:any
 }
 
 
 const SearchUser: React.FC<SearchUserProps> = ({
-  role
+  role,
+  data
 }) => {
-  
   const session = useSession()
   const router = useRouter()
 
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>(data);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<User[]>([]);
 
@@ -33,19 +33,16 @@ const SearchUser: React.FC<SearchUserProps> = ({
     }
   }, [role, router])
 
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get('/api/users');
-      setUsers(response.data);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
+
   const handleSearch = (searchTerm: string) => {
+    if (searchTerm===""){
+      setSearchResults([]);
+      return;
+    }
     setSearchTerm(searchTerm);
 
-    const filteredResults = users.filter((user) =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredResults = users.filter((item:any) =>
+      item.codigo.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(filteredResults);
   };
@@ -57,14 +54,11 @@ const SearchUser: React.FC<SearchUserProps> = ({
     }
   }, [session?.status, router])
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
 
 
   return (
-    <div className='mt-11' >
+    <div className='mt-11 h-[60vh]' >
       <SearchForm users={users} onSearch={handleSearch} />
       <SearchResults results={searchResults} />
     </div>

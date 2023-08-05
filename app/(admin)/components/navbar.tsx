@@ -1,14 +1,19 @@
 'use client'
 
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { MainNav } from "./main-nav";
 import Button from "@/app/components/Button";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
 
- 
+  const [isMounted, setIsMounted] = useState(false);
+
+ useEffect(()=>{
+  setIsMounted(true)
+ },[])
+
+ if(!isMounted) return null
 
   return (
     <div className="border-b">

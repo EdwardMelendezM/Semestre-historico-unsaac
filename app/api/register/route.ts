@@ -13,7 +13,6 @@ export async function POST(
     name,
     password,
     role,
-    image
   } = body;
 
   //Encryptamos la contraseña
@@ -27,7 +26,6 @@ export async function POST(
       hashedPassword,
       email: codigo,
       role,
-      image
 
     }
   });
