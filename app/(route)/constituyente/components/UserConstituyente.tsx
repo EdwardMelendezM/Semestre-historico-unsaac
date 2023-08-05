@@ -1,57 +1,22 @@
 'use client'
 import Button from "@/app/components/Button";
-import Input from "@/app/components/Input";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 import ItemUser from "./ItemUser";
 
-const UserConstituyente = () => {
+interface UserConstituyenteProps{
+  currentUser:any
+}
+
+const UserConstituyente: React.FC<UserConstituyenteProps> = ({
+  currentUser
+}) => {
 
   const session = useSession()
   const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    formState: {
-      errors
-    } } = useForm<FieldValues>({
-      defaultValues: {
-        titulo:"",
-        grado:"",
-        lugar:"",
-        area:"",
-        cargo:"",
-        fechaGrado:"",
-        fechaCapacitacion:"",
-        lugarCapacitacion:"",
-        denominacioncapacitacion:"",
-      }
-    })
-
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    if (!data.email || !data.password) return
-    setIsLoading(true)
-    try {
-      setIsLoading(true)
-      await axios.patch(`/api/users`, data)
-      router.refresh()
-      router.push(`/api/users`)
-      toast.success("Actualizado correctamente")
-    } catch (error) {
-      toast.error('Something went wrong')
-    } finally {
-      setIsLoading(false)
-    }
-
-  }
-
 
   useEffect(() => {
     console.log(session?.status)
@@ -81,8 +46,7 @@ const UserConstituyente = () => {
         </div>
         
         <Button
-          disabled={isLoading}
-          onClick={() => router.push("/constituyente/11231232")}
+          onClick={() => router.push("/constituyente/codigo")}
         >
           Editar
         </Button>
@@ -91,17 +55,17 @@ const UserConstituyente = () => {
         <div className="mt-8 text-gray-700 font-bold text-xl ">
           Datos personales
         </div>
-        <ItemUser label="Nombre" text="Juan" />
-        <ItemUser label="Codigo" text="171717" />
-        <ItemUser label="Rol" text="Alumno" />
-        <ItemUser label="Titulo" text="Ing software" />
-        <ItemUser label="Lugar" text="Conferencia XII" />
-        <ItemUser label="Area" text="Inteligencia Artificial" />
-        <ItemUser label="Cargo" text="Informador" />
-        <ItemUser label="Fecha de grado" text="8 de Marzo 2023" />
-        <ItemUser label="Lugar Capacitacion" text="Unsaac" />
-        <ItemUser label="Denominacion de capacitacion" text="Info IA" />
-        <ItemUser label="Semestre" text="2022-II" />
+        <ItemUser label="Nombre" text={currentUser?.name} />
+        <ItemUser label="Codigo" text={currentUser?.codigo} />
+        <ItemUser label="Rol" text={currentUser?.typeRole} />
+        <ItemUser label="Titulo" text={currentUser?.titulo} />
+        <ItemUser label="Lugar" text={currentUser?.lugar} />
+        <ItemUser label="Area" text={currentUser?.area} />
+        <ItemUser label="Cargo" text={currentUser?.titulo} />
+        <ItemUser label="Fecha de grado" text={currentUser?.fechaGrado} />
+        <ItemUser label="Lugar Capacitacion" text={currentUser?.lugarCapacitacion} />
+        <ItemUser label="Denominacion de capacitacion" text={currentUser?.denominacionCapacitacion} />
+        <ItemUser label="Matriculado" text={currentUser?.matriculado} />
 
       </div>
     </div>
