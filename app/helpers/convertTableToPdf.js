@@ -22,7 +22,7 @@ const convertTableToPdf = (tableReference, filename = 'document', format) => {
   
   doc.autoTable({
     html: table,
-    theme: 'striped'
+    theme: 'grid'
   })
 
   // se descarga el documento

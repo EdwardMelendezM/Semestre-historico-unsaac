@@ -28,7 +28,7 @@ const Table: React.FC<TableProps> = ({data}) => {
       <img
         onClick={downloadPdf}
         src="icons/download.svg"
-        className="w-8 h-8 absolute top-0 right-10"
+        className="w-6 h-6 absolute top-4 right-12 opacity-50 text-gray-500 hover:cursor-pointer hover:opacity-80"
       />
       <table
         ref={refTable}
