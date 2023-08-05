@@ -10,7 +10,7 @@ export async function POST(
   try {
     
     const body = await request.json()
-    const { codigo,name,role,matriculado,estado}= body;
+    const { codigo,name,role,matriculado,}= body;
 
     const alumno = await prisma.user.create({
       data:{
