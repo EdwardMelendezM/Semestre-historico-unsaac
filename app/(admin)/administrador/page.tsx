@@ -2,22 +2,23 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import Heading from "../components/heading";
 import Informes from "./components/Informes";
 import SearchUser from "./components/SearchUser";
+import getAlumnosSemestre from "@/app/actions/getAlumnosSemestre";
 
 
 
 const DashboardAdmin = async () => {
 
-
   const currentUser = await getCurrentUser();
-  console.log(currentUser);
-  
+  const alumnosSemestre = await getAlumnosSemestre();
 
+  console.log(alumnosSemestre)
+  
   return (
     <div className="px-6 py-11">
       <Heading
       // Aqui tiene que ir el rol
-        title={`Administrador`}
-        description="Acceso a buscar y consultar informacion de los constituyentes"
+        title={`${currentUser?.typeRole}`}
+        description="Acceso a buscar y consultar informacion de los constituyentes, y tambien informes"
       />
 
       <Informes />
