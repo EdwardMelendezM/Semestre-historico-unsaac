@@ -1,12 +1,13 @@
-import prisma from "@/app/libs/prismadb"
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import Heading from "../components/heading";
 import UserConstituyente from "./components/UserConstituyente";
 
 
-const DashboardAdmin = async () => {
+const Constituyentes = async () => {
 
-  const currentUser = getCurrentUser();
+  const currentUser = await getCurrentUser();
+  
+  console.log(currentUser)
 
   return (
     <div className="px-6 py-11">
@@ -17,10 +18,12 @@ const DashboardAdmin = async () => {
       />
       <hr className="border-gray-300 mt-11 border-2" />
 
-      <UserConstituyente currentUser={currentUser} />
+      {
+        currentUser && <UserConstituyente currentUser={currentUser} />
+      }
 
     </div>
   );
 }
 
-export default DashboardAdmin;
+export default Constituyentes;

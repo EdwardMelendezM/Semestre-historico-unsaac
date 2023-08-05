@@ -28,6 +28,10 @@ const SearchUser: React.FC<SearchUserProps> = ({
   const [searchResults, setSearchResults] = useState<User[]>([]);
 
   useEffect(()=>{
+    if (!role){
+      router.push("/")
+      return;
+    }
     if (role!=="admin"){
       router.push("/constituyente")
     }

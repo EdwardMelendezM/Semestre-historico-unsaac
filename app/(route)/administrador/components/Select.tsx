@@ -15,7 +15,7 @@ interface State {
 }
 
 interface SelectProps {
-  data: any;
+  data: any | null;
 }
 
 const Select: React.FC<SelectProps> = ({ data }) => {

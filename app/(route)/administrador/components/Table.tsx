@@ -51,15 +51,15 @@ const Table: React.FC<TableProps> = ({data}) => {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {data.map((row:any) => (
-            <tr key={row.user.id}>
+            <tr key={row?.user?.id}>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">{row.user.codigo}</div>
+                <div className="text-sm text-gray-900">{row?.user?.codigo}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">{row.user.name}</div>
+                <div className="text-sm text-gray-900">{row?.user?.name}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">{row.user.estadoAlumno}</div>
+                <div className="text-sm text-gray-900">{row?.user?.estadoAlumno}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm text-gray-900">Matriculado</div>

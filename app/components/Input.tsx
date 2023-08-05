@@ -16,6 +16,7 @@ interface InputProps {
   errors: FieldErrors
   disabled?: boolean
   placeholder?:string
+  value?:any
 
 }
 
@@ -28,10 +29,11 @@ const Input: React.FC<InputProps> = ({
   errors,
   disabled,
   placeholder,
+  value
 }) => {
 
   return (
-    <div>
+    <div className='flex flex-col'>
       <label
         htmlFor={id}
         className='
@@ -48,6 +50,7 @@ const Input: React.FC<InputProps> = ({
         <input
           placeholder={placeholder}
           id={id}
+          value={value}
           type={type}
           autoComplete={id}
           disabled={disabled}

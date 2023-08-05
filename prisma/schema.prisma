@@ -25,8 +25,8 @@ model User {
   cargo           String?
   fechaGrado      DateTime?
   fechaCapacitacion DateTime?
-  lugarCapacitacion DateTime?
-  denominacioncapacitacion DateTime?
+  lugarCapacitacion String?
+  denominacioncapacitacion String?
   codigo          String?  @unique
   matriculado     String?
   estadoAlumno    String?

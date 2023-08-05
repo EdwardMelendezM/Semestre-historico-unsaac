@@ -16,6 +16,7 @@ export async function POST(
   try {
     const { codigo } = params;
     const body = await request.json();
+    console.log(body)
     const {
       name,
       image,

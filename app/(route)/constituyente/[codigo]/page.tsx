@@ -1,8 +1,10 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import UpdateUser from "./components/UpdateUser";
 
-const UserEdit = () => {
-  const currentUser = getCurrentUser();
+const UserEdit = async () => {
+  const currentUser = await getCurrentUser();
+  
+  
   return ( 
     <>
       <UpdateUser currentUser={currentUser}  />

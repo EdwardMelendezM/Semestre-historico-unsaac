@@ -18,6 +18,7 @@ const AuthForm = () => {
 
   useEffect(() => {
     if (session?.status === 'authenticated') {
+      router.refresh()
       router.push('/administrador')
     }
   }, [session?.status, router])
