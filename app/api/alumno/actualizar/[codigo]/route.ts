@@ -20,14 +20,6 @@ export async function POST(
     const {
       name,
       image,
-      titulos,
-      grados,
-      cargo,
-      lugar,
-      fechaGrado,
-      fechaCapacitacion,
-      lugarCapacitacion,
-      denominacioncapacitacion,
     } = body;
     const originalUser = await prisma.user.findUnique({
       where: { codigo: codigo },
