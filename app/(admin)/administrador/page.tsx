@@ -3,6 +3,9 @@ import Heading from "../components/heading";
 import Informes from "./components/Informes";
 import SearchUser from "./components/SearchUser";
 import getAlumnosSemestre from "@/app/actions/getAlumnosSemestre";
+import getEgresadosSemestre from "@/app/actions/getEgresadosSemestre";
+import getGraduadosSemestre from "@/app/actions/getGraduadosSemestre";
+import getAlumnos from "@/app/actions/getAlumnos";
 
 
 
@@ -10,6 +13,10 @@ const DashboardAdmin = async () => {
 
   const currentUser = await getCurrentUser();
   const alumnosSemestre = await getAlumnosSemestre();
+  const egresadosSemestre = await getEgresadosSemestre()
+  const graduadosSemestre = await getGraduadosSemestre()
+
+  const alumnos = await getAlumnos()
   
   return (
     <div className="px-6 py-11">
@@ -21,10 +28,12 @@ const DashboardAdmin = async () => {
 
       <Informes
         alumnosSemestre={alumnosSemestre}
+        egresadosSemestre={egresadosSemestre}
+        graduadosSemestre={graduadosSemestre}
       />
 
       <hr className="border-gray-300 mt-11 border-2" />
-      <SearchUser role={currentUser?.role} />
+      <SearchUser role={currentUser?.role} data={alumnos} />
       
     </div>
   );
