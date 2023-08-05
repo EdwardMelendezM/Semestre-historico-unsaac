@@ -11,7 +11,14 @@ interface User {
   name: string;
 }
 
-const App: React.FC = () => {
+interface SearchUserProps{
+  role:string | null | undefined
+}
+
+
+const SearchUser: React.FC<SearchUserProps> = ({
+  role
+}) => {
   
   const session = useSession()
   const router = useRouter()
@@ -19,6 +26,12 @@ const App: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<User[]>([]);
+
+  useEffect(()=>{
+    if (role!=="admin"){
+      router.push("/constituyente")
+    }
+  }, [role, router])
 
   const fetchUsers = async () => {
     try {
@@ -58,4 +71,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default SearchUser;

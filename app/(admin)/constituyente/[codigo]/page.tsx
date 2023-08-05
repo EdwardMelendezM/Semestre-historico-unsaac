@@ -5,7 +5,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
@@ -51,6 +51,13 @@ const UserConstituyente = () => {
     }
 
   }
+
+  useEffect(() => {
+    console.log(session?.status)
+    if (session?.status !== 'authenticated') {
+      router.push('/')
+    }
+  }, [session?.status, router])
 
   return (
     <div className="mt-11 px-8 py-6 flex flex-col gap-y-4 items-center justify-center">

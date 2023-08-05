@@ -17,6 +17,7 @@ const getCurrentUser = async () => {
         codigo: session.user.email as string
       }
     });
+    console.log({currentUser})
 
     if (!currentUser) {
       return null;
