@@ -16,7 +16,8 @@ model User {
   email           String?  
   image           String?
   hashedPassword  String?
-  role            String?
+  role            String? 
+  typeRole        String? @default("user")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   titulos         String?
@@ -30,7 +31,7 @@ model User {
   denominacioncapacitacion DateTime?
   codigo          String?  @unique
   matriculado     String?
-  estado          String?
+  estadoAlumno    String?
   semestre Semestre[] 
   historial Historial[]
   
