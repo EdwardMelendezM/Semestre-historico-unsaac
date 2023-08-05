@@ -7,7 +7,7 @@ import UserConstituyente from "./components/UserConstituyente";
 const DashboardAdmin = async () => {
 
   const currentUser = getCurrentUser();
-  console.log(currentUser)
+  console.log({currentUser})
 
   return (
     <div className="px-6 py-11">

@@ -1,9 +1,16 @@
+import getCurrentUser from "@/app/actions/getCurrentUser";
 import Heading from "../components/heading";
 import Informes from "./components/Informes";
 import SearchUser from "./components/SearchUser";
 
 
-const DashboardAdmin = () => {
+
+const DashboardAdmin = async () => {
+
+
+  const currentUser = await getCurrentUser();
+  console.log(currentUser);
+  
 
   return (
     <div className="px-6 py-11">
@@ -16,7 +23,7 @@ const DashboardAdmin = () => {
       <Informes />
 
       <hr className="border-gray-300 mt-11 border-2" />
-      <SearchUser />
+      <SearchUser role={currentUser?.role} />
       
     </div>
   );

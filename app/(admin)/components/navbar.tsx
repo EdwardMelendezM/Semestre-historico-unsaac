@@ -19,7 +19,7 @@ const Navbar = () => {
             secondary
             onClick={() => 
             signOut()}>
-            Cerrar seccion
+            Cerrar sesion
           </Button>
         </div>
       </div>

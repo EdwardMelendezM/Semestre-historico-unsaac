@@ -11,10 +11,11 @@ export async function POST(
   const {
     codigo,
     name,
-    password
+    password,
+    role,
+    estado,
   } = body;
 
-  console.log(body)
   //Encryptamos la contraseña
   const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -23,7 +24,10 @@ export async function POST(
     data: {
       codigo,  
       name,
-      hashedPassword
+      hashedPassword,
+      email: codigo,
+      role,
+      estado
     }
   });
 
