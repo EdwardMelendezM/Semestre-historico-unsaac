@@ -17,9 +17,9 @@ export async function GET(
 
   try {
 
-    const alumno = await prisma.user.findMany({
+    const alumno = await prisma.historial.findMany({
       where: {
-        codigo:params.codigo
+        alumnosCodigo:params.codigo
       }
     })
     
