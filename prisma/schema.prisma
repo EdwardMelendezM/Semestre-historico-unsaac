@@ -31,15 +31,15 @@ model User {
   denominacioncapacitacion DateTime?
   codigo          String?  @unique
   matriculado     String?
-  estado          String?
+  estadoAlumno    String?
   semestre Semestre[] 
   historial Historial[]
   
 }
 model Semestre{
    id              String @id @default(auto()) @map("_id") @db.ObjectId
-   name            String? @unique
-   alumnosCodigo   String  
+   name            String 
+   alumnosCodigo   String   
    user User     @relation(fields:[alumnosCodigo],references: [codigo]) 
    createdAt       DateTime @default(now())
    updatedAt       DateTime @updatedAt

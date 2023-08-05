@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from '@/app/components/Button';
+import { useRouter } from 'next/navigation';
 
 interface Option {
   id: number;
@@ -18,6 +19,9 @@ interface SelectProps{
 }
 
 const Select: React.FC<SelectProps> = ({type}) => {
+
+  const router = useRouter()
+
   const [isLoading, setIsLoading] = useState(false);
   const [state, setState] = useState<State>({
     options: [
@@ -36,46 +40,6 @@ const Select: React.FC<SelectProps> = ({type}) => {
   ],
     selectedOption: '',
   });
-
-  // API DE DESCARGAR
-  const downloadFile= async ()=>{
-    setIsLoading(true)
-    if (type ==="ALUMNOS"){
-      const file = await axios.get('/api/semestreALumno')
-        .then((response) => {
-
-        })
-        .catch((error) => {
-          console.error('Error, no existe este archivo:', error);
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
-    } else if (type === "ALUMNOS_EGRESADOS"){
-      const file = await axios.get('/api/semestreEgresado')
-        .then((response) => {
-
-        })
-        .catch((error) => {
-          console.error('Error, no existe este archivo:', error);
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
-    } else if (type === "ALUMNOS_GRADUADO") {
-      const file = await axios.get('/api/semestreGraduado')
-        .then((response) => {
-
-        })
-        .catch((error) => {
-          console.error('Error, no existe este archivo:', error);
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
-    }
-   
-  }
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setState((prev) => ({ ...prev, selectedOption: event.target.value }));
@@ -99,9 +63,9 @@ const Select: React.FC<SelectProps> = ({type}) => {
       </select>
       <Button
         disabled={isLoading}
-        onClick={()=>{}}
+        onClick={() => router.push(`/administrador/${state}`)}
       >
-        Generar
+        Ver
       </Button>
     </div>
   );
