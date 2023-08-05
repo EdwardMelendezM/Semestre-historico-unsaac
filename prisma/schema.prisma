@@ -31,13 +31,14 @@ model User {
   codigo          String?  @unique
   matriculado     String?
   estado          String?
+  semestrematri   String?
   semestre Semestre[] 
   historial Historial[]
   
 }
 model Semestre{
    id              String @id @default(auto()) @map("_id") @db.ObjectId
-   name            String 
+   name            String? 
    alumnosCodigo   String   
    user User     @relation(fields:[alumnosCodigo],references: [codigo]) 
    createdAt       DateTime @default(now())
