@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { format } from 'date-fns'
+import { CldUploadButton } from "next-cloudinary";
 
 
 
@@ -22,14 +23,18 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
   const session = useSession() || null
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false);
-
+  
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: {
       errors
     } } = useForm<FieldValues>({
       defaultValues: {
+        name: currentUser?.name || "",
+        image: currentUser?.image || null,
         titulos: currentUser?.titulos || "",
         grados: currentUser?.grados || "",
         lugar: currentUser?.lugar ||"",
@@ -41,6 +46,14 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
         denominacioncapacitacion: currentUser?.denominacioncapacitacion ||"",
       }
     })
+
+  const image = watch('image');
+
+  const handleUpload = (result: any) => {
+    setValue('image', result?.info?.secure_url, {
+      shouldValidate: true
+    })
+  }
 
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -74,19 +87,26 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
     <div className="mt-11 px-8 py-6 flex flex-col gap-y-4 items-center justify-center">
       <div className="relative">
         <Image
-          src="/images/placeholder.jpg"
+          src={image || currentUser?.image ||"/images/placeholder.jpg"}
           alt="placeholbeder"
           width={"244"}
           height={"244"}
           className="rounded-full"
         />
-        <Image
-          src="/images/edit.svg"
-          alt="placeholbeder"
-          width={"48"}
-          height={"48"}
-          className="rounded-full bg-slate-400 p-2 absolute bottom-0 right-0 hover:cursor-pointer hover:bg-slate-300 transition"
-        />
+        <CldUploadButton
+          options={{ maxFiles: 1 }}
+          onUpload={handleUpload}
+          uploadPreset="juar7bjz"
+        >
+          <Image
+            src="/images/edit.svg"
+            alt="placeholbeder"
+            width={"48"}
+            height={"48"}
+            className="rounded-full bg-slate-400 p-2 absolute bottom-0 right-0 hover:cursor-pointer hover:bg-slate-300 transition"
+          />
+        </CldUploadButton>
+        
       </div>
       <div className="text-gray-700 font-semibold text-xl mt-4">
         Datos personales

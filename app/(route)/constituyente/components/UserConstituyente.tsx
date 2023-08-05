@@ -20,6 +20,7 @@ const UserConstituyente: React.FC<UserConstituyenteProps> = ({
 
   const [isMounted, setIsMounted] = useState(false);
 
+
   useEffect(()=>{
     setIsMounted(true)
   },[])
@@ -38,18 +39,20 @@ const UserConstituyente: React.FC<UserConstituyenteProps> = ({
       <div className="flex flex-col gap-y-4 items-center justify-center">
         <div className="relative">
           <Image
-            src="/images/placeholder.jpg"
+            src={currentUser?.image ||"/images/placeholder.jpg"}
             alt="placeholbeder"
             width={"244"}
             height={"244"}
             className="rounded-full"
           />
+          
           <Image
             src="/images/edit.svg"
             alt="placeholbeder"
             width={"48"}
             height={"48"}
             className="rounded-full bg-slate-400 p-2 absolute bottom-0 right-0 hover:cursor-pointer hover:bg-slate-300 transition"
+            onClick={() => router.push("/constituyente/codigo")}
           />
         </div>
         
