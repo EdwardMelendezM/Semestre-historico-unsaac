@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
+import { empty } from "@prisma/client/runtime/library";
 
 export async function POST(
   request: Request,
@@ -12,39 +13,58 @@ export async function POST(
       params: { codigo: string }
     }
 ) {
-  console.log("body")
   try {
     const { codigo } = params;
     const body = await request.json();
     const {
       name,
       image,
-      role,
       titulos,
       grados,
-      lugar ,
-      area,
       cargo,
+      lugar,
       fechaGrado,
       fechaCapacitacion,
       lugarCapacitacion,
       denominacioncapacitacion,
     } = body;
-
-
+    const originalUser = await prisma.user.findUnique({
+      where: { codigo: codigo },
+    });
     const updatedUser = await prisma.user.update({
       where: {
         codigo: codigo, 
       },
       data: body, 
     });
-    
 
-    return new Response(JSON.stringify(updatedUser), {
+    const l = []
+     for (const i in updatedUser){
+      if ((updatedUser[i as keyof typeof updatedUser]) !== (originalUser![i as keyof typeof originalUser])){
+        l.push(i);}}
+    console.log(l)
+    if (l.length!=0){
+        const createSemestre = await prisma.historial.create({
+          data: {
+            alumnosCodigo: codigo,
+            mensaje: "Se actualizó los siguientes datos del usuario: " + l,
+
+          }});
+      }else{
+        const createSemestre = await prisma.historial.create({
+          data: {
+            alumnosCodigo: codigo,
+            mensaje: "no se modifico ningun dato ",
+
+          }});
+      }
+    const updatedUserString = JSON.stringify(updatedUser, null, 2);
+    return new Response(updatedUserString, {
       headers: { 'Content-Type': 'application/json' },
-    });
-
-  } catch (error) {
+    }); 
+ 
+    
+  }catch (error) {
     console.log('[BILLBOARDS_GET]', error);
     return new Response('Internal Error', { status: 500 });
   }

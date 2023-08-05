@@ -18,8 +18,6 @@ model User {
   hashedPassword  String?
   role            String? 
   typeRole        String? @default("user")
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
   titulos         String?
   grados          String?
   lugar           String?
@@ -48,6 +46,7 @@ model Semestre{
 }
 model Historial{
     id              String @id @default(auto()) @map("_id") @db.ObjectId
+    mensaje          String?
     alumnosCodigo   String   
     user User     @relation(fields:[alumnosCodigo],references: [codigo]) 
     createdAt       DateTime @default(now())
