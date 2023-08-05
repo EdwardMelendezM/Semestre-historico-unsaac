@@ -34,6 +34,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
     } } = useForm<FieldValues>({
       defaultValues: {
         name: currentUser?.name || "",
+        codigo:currentUser?.codigo || null,
         image: currentUser?.image || null,
         titulos: currentUser?.titulos || "",
         grados: currentUser?.grados || "",
@@ -125,79 +126,94 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
             disabled={isLoading}
             value={currentUser?.name}
           />
+          <Input
+            id="codigo"
+            label="Codigo"
+            type="text"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            value={currentUser?.codigo}
+          />
 
-          <Input
-            id="titulos"
-            label="Titulo"
-            type="text"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            value={currentUser?.titulos}
-          />
-          <Input
-            id="grados"
-            label="Grado"
-            type="text"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            value={currentUser?.grados}
-          />
-          <Input
-            id="lugarCapacitacion"
-            label="lugar"
-            type="text"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            value={currentUser?.lugar}
-          />
-          <Input
-            id="area"
-            label="Area"
-            type="text"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            value={currentUser?.area}
-          />
-          <Input
-            id="cargo"
-            label="Cargo"
-            type="text"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            value={currentUser?.cargo}
-          />
-          <Input
-            id="fechaGrado"
-            label="Fecha de grado"
-            type="datetime-local"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            value={currentUser?.fechaGrado}
-          />
-          <Input
-            id="fechaCapacitacion"
-            label="Fecha de ultima capacitacion"
-            type="datetime-local"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            value={currentUser?.fechaCapacitacion}
-          />
-          <Input
-            id="denominacioncapacitacion"
-            label="Denominaicon de ultima capacitacion"
-            type="text"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            value={currentUser?.denominacioncapacitacion}
-          />
+          {
+            currentUser?.typeRole!=="Estudiante" && (
+              <>
+                <Input
+                  id="titulos"
+                  label="Titulo"
+                  type="text"
+                  register={register}
+                  errors={errors}
+                  disabled={isLoading}
+                  value={currentUser?.titulos}
+                />
+                <Input
+                  id="grados"
+                  label="Grado"
+                  type="text"
+                  register={register}
+                  errors={errors}
+                  disabled={isLoading}
+                  value={currentUser?.grados}
+                />
+                <Input
+                  id="lugarCapacitacion"
+                  label="lugar"
+                  type="text"
+                  register={register}
+                  errors={errors}
+                  disabled={isLoading}
+                  value={currentUser?.lugar}
+                />
+                <Input
+                  id="area"
+                  label="Area"
+                  type="text"
+                  register={register}
+                  errors={errors}
+                  disabled={isLoading}
+                  value={currentUser?.area}
+                />
+                <Input
+                  id="cargo"
+                  label="Cargo"
+                  type="text"
+                  register={register}
+                  errors={errors}
+                  disabled={isLoading}
+                  value={currentUser?.cargo}
+                />
+                <Input
+                  id="fechaGrado"
+                  label="Fecha de grado"
+                  type="datetime-local"
+                  register={register}
+                  errors={errors}
+                  disabled={isLoading}
+                  value={currentUser?.fechaGrado}
+                />
+                <Input
+                  id="fechaCapacitacion"
+                  label="Fecha de ultima capacitacion"
+                  type="datetime-local"
+                  register={register}
+                  errors={errors}
+                  disabled={isLoading}
+                  value={currentUser?.fechaCapacitacion}
+                />
+                <Input
+                  id="denominacioncapacitacion"
+                  label="Denominaicon de ultima capacitacion"
+                  type="text"
+                  register={register}
+                  errors={errors}
+                  disabled={isLoading}
+                  value={currentUser?.denominacioncapacitacion}
+                />
+              </>
+            )
+          }
         </div>
          
         <div className="mt-11 px-11">
