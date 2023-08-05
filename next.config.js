@@ -2,3 +2,5 @@
 const nextConfig = {}
 
 module.exports = nextConfig
+const dotenv = require('dotenv');
+dotenv.config();
