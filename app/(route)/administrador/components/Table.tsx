@@ -1,14 +1,38 @@
 'use client'
+
+import { useEffect, useRef, useState } from "react";
+import convertTableToPdf from "../../../helpers/convertTableToPdf"
+
 interface TableProps{
   data:any
 }
 
 const Table: React.FC<TableProps> = ({data}) => {
-  console.log(data)
+  
+
+  const [isMounted, setIsMounted] = useState(false);
+  const refTable = useRef<HTMLTableElement>(null)
+
+  const downloadPdf = ()=>{
+    convertTableToPdf(refTable,"informe","")
+  }
+
+  useEffect(()=>{
+    setIsMounted(true)
+  },[])
+
+  if(!isMounted) return null
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
+      <img
+        onClick={downloadPdf}
+        src="icons/download.svg"
+        className="w-8 h-8 absolute top-0 right-10"
+      />
+      <table
+        ref={refTable}
+        className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">

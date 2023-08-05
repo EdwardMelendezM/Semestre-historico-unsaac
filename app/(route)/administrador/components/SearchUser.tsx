@@ -41,8 +41,8 @@ const SearchUser: React.FC<SearchUserProps> = ({
     }
     setSearchTerm(searchTerm);
 
-    const filteredResults = users.filter((item:any) =>
-      item.codigo.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredResults = users.filter((user:any) =>
+      user.codigo.toLowerCase().includes(searchTerm.toLowerCase()) || user.name.toLowerCase().includes(searchTerm.toLowerCase()) 
     );
     setSearchResults(filteredResults);
   };
