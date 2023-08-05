@@ -14,7 +14,7 @@ export async function GET(
     }
 ) {
 
-  try {
+ /* try {
     const alumnos = await prisma.user.findMany();
 
     const matriculados = alumnos
@@ -32,5 +32,5 @@ export async function GET(
   } catch (error) {
     console.log('[BILLBOARDS_GET]', error);
     return new NextResponse('Internal Error', { status: 500 });
-  }
+  }*/
 }   
