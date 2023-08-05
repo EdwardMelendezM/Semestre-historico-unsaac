@@ -1,11 +1,11 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Button from '@/app/components/Button';
-import { useRouter } from 'next/navigation';
+import Modal from '@/app/components/Modal';
+import Table from './Table';
 
 interface Option {
-  id: number;
+  id: string;
   name: string;
 }
 
@@ -14,60 +14,82 @@ interface State {
   selectedOption: string;
 }
 
-interface SelectProps{
-  type: "ALUMNOS" | "ALUMNOS_EGRESADOS" | "ALUMNOS_GRADUADO"
+interface SelectProps {
+  data: any;
 }
 
-const Select: React.FC<SelectProps> = ({type}) => {
+const Select: React.FC<SelectProps> = ({ data }) => {
+  const [isMounted, setIsMounted] = useState(false);
 
-  const router = useRouter()
-
-  const [isLoading, setIsLoading] = useState(false);
+  const [dataTable, setDataTable] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState<State>({
     options: [
       {
-        id:1,
-        name:"2023-I"
+        id: '2023-I',
+        name: '2023-I',
       },
       {
-        id: 2,
-        name: "2022-II"
+        id: '2022-II',
+        name: '2022-II',
       },
       {
-        id: 3,
-        name: "2022-I"
+        id: '2022-I',
+        name: '2022-I',
       },
-  ],
+    ],
     selectedOption: '',
   });
 
+  // console.log(dataTable)
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setState((prev) => ({ ...prev, selectedOption: event.target.value }));
+    const selectedOption = event.target.value;
+    setState((prev) => ({ ...prev, selectedOption }));
   };
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (state.selectedOption !== '') {
+      // Aquí accedemos al valor del objeto en data según la opción seleccionada
+      setDataTable(data[state.selectedOption]);
+    }
+    
+  }, [state.selectedOption, data]);
+
+  if (!isMounted) return null;
+
   return (
-    <div className=' mt-2 font-sans text-sm flex flex-col gap-y-2'>
-      
-      <select
-        id="selectOption"
-        value={state.selectedOption}
-        onChange={handleSelectChange}
-        className="block w-full mt-1 rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border-2 "
-      >
-        <option value="">Seleccionar semestre</option>
-        {state.options.map((option) => (
-          <option key={option.id} value={option.id.toString()}>
-            {option.name}
-          </option>
-        ))}
-      </select>
-      <Button
-        disabled={isLoading}
-        onClick={() => router.push(`/administrador/${state}`)}
-      >
-        Ver
-      </Button>
-    </div>
+    <>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <h1 className='text-gray-600 font-bold text-xl text-center'>Tabla</h1>
+        <Table data={dataTable} />
+      </Modal>
+      <div className=' mt-2 font-sans text-sm flex flex-col gap-y-2'>
+        <select
+          id='selectOption'
+          value={state.selectedOption}
+          onChange={handleSelectChange}
+          className='block w-full mt-1 rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border-2 '
+        >
+          <option value=''>Seleccionar semestre</option>
+          {state.options.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.name}
+            </option>
+          ))}
+        </select>
+        <Button onClick={() => {
+          setIsOpen(true)
+          console.log(state.selectedOption)
+        }}>
+          Ver
+        </Button>
+      </div>
+    </>
   );
 };
 

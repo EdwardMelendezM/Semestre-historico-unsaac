@@ -10,8 +10,6 @@ const DashboardAdmin = async () => {
 
   const currentUser = await getCurrentUser();
   const alumnosSemestre = await getAlumnosSemestre();
-
-  console.log(alumnosSemestre)
   
   return (
     <div className="px-6 py-11">
@@ -21,7 +19,9 @@ const DashboardAdmin = async () => {
         description="Acceso a buscar y consultar informacion de los constituyentes, y tambien informes"
       />
 
-      <Informes />
+      <Informes
+        alumnosSemestre={alumnosSemestre}
+      />
 
       <hr className="border-gray-300 mt-11 border-2" />
       <SearchUser role={currentUser?.role} />

@@ -1,21 +1,24 @@
+'use client'
 
 import Select from "./Select";
 
 interface GeneradorProsp{
   label:string
-  type: "ALUMNOS" | "ALUMNOS_EGRESADOS" | "ALUMNOS_GRADUADO"
+  data:any
 }
 
 const Generador: React.FC<GeneradorProsp> = ({
   label,
-  type
+  data
 }) => {
+
+
   return ( 
     <>
       <div>
         {label}
       </div>
-      <Select type={type}/>
+      <Select data={data}/>
     </>
    );
 }
