@@ -16,7 +16,8 @@ model User {
   email           String?  
   image           String?
   hashedPassword  String?
-  role            String?
+  role            String? 
+  typeRole        String? @default("user")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   titulos         String?
@@ -31,15 +32,14 @@ model User {
   codigo          String?  @unique
   matriculado     String?
   estado          String?
-  semestrematri   String?
   semestre Semestre[] 
   historial Historial[]
   
 }
 model Semestre{
    id              String @id @default(auto()) @map("_id") @db.ObjectId
-   name            String? 
-   alumnosCodigo   String   
+   name            String? @unique
+   alumnosCodigo   String  
    user User     @relation(fields:[alumnosCodigo],references: [codigo]) 
    createdAt       DateTime @default(now())
    updatedAt       DateTime @updatedAt

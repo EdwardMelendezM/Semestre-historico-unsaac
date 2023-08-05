@@ -16,7 +16,7 @@ export async function POST(
 
      }= body;
 
-    const semestre = await prisma.semestre.create({
+    const semestre = await prisma.user.create({
       data:{ name
        
       }
