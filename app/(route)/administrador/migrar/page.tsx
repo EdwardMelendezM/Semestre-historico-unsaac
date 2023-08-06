@@ -3,6 +3,7 @@ import prismadb  from "@/app/libs/prismadb"
 import InputFile from "./components/InputFile";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import EmptyState from "@/app/components/EmptyState";
+import InputFileDocente from "./components/InputFileDocente";
 
 
 const ConstituyentePage = async ()=> {
@@ -25,6 +26,7 @@ const ConstituyentePage = async ()=> {
             title="Migrar base de datos"
           />
           <InputFile />
+          <InputFileDocente />
         </div>
       </div>
     </>
