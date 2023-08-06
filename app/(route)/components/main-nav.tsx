@@ -66,7 +66,7 @@ export function MainNav({
         <Link
           key={route.href}
           href={route.href}
-          className={cn(`text-sm sm:text-lg font-medium transition-colors hover:text-primary hover:opacity-80 text-center`)}
+          className={cn(`text-sm sm:text-md font-medium text-gray-100 transition-colors hover:text-primary hover:opacity-80 text-center`)}
         >
           {route.label}
         </Link>
@@ -76,7 +76,7 @@ export function MainNav({
         <Link
           key={route.href}
           href={route.href}
-          className={cn(`text-sm sm:text-lg font-medium transition-colors hover:text-primary hover:opacity-80 text-center`)}
+          className={cn(`text-sm sm:text-md font-medium text-gray-100 transition-colors hover:text-primary hover:opacity-80 text-center`)}
         >
           {route.label}
         </Link>

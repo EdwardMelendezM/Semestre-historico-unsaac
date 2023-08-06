@@ -67,7 +67,7 @@ const InputFile = () => {
         <img
           src="/images/formatoAlumno.png"
           alt="formato Alumno"
-          className="w-[200px] rounded-2xl object-cover"
+          className="rounded-2xl object-cover"
         />
       </Modal>
 
@@ -110,6 +110,7 @@ const InputFile = () => {
             Subir
           </Button>
           <Button
+            type="button"
             secondary
             disabled={isLoading}
             onClick={()=>setIsOpen(true)}
