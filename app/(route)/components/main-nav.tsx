@@ -55,7 +55,7 @@ export function MainNav({
       className={cn('flex items-center space-x-4 lg:space-x-6', className)}
     >
       <img
-        src="images/unsaacPlaceholder.jpg"
+        src="images/logoInfo.png"
         alt="Logo unsaac"
         className="hidden sm:block rounded-2xl h-16 pt-3 hover:cursor-pointer hover:opacity-80 transition"
         onClick={() => router.push("/")}

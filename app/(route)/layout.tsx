@@ -4,6 +4,7 @@ import Navbar from './components/navbar'
 import getCurrentUser from '../actions/getCurrentUser'
 import ClientOnly from '../components/ClientOnly'
 import ToasterContext from '../context/ContextToast'
+import AuthContext from '../context/AuthContext'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,9 +23,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ToasterContext />
         <ClientOnly>
-          <ToasterContext />
-          <Navbar role={currentUser?.role} />
+          <AuthContext>
+            <Navbar role={currentUser?.role} />
+          </AuthContext>
         </ClientOnly>
           {children}
       </body>

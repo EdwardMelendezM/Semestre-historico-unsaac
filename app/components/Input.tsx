@@ -41,7 +41,7 @@ const Input: React.FC<InputProps> = ({
         htmlFor={id}
         className='
           block
-          text-sm
+          text-lg
           font-medium
           leading-6
           text-gray-900

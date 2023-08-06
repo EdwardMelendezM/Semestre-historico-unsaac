@@ -25,8 +25,8 @@ import EmptyState from "@/app/components/EmptyState";
     if (!currentUser){
       <ClientOnly>
         <EmptyState
-          title="Unauthorized"
-          subtitle="Please login"
+          title="No autorizado"
+          subtitle="Por favor, inicie sesion"
 
         />
       </ClientOnly>

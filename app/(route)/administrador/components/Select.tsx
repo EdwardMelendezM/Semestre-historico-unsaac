@@ -66,7 +66,10 @@ const Select: React.FC<SelectProps> = ({ data }) => {
     <>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <h1 className='text-gray-600 font-bold text-xl text-center'>Tabla</h1>
-        <Table data={dataTable} />
+        <Table
+          data={dataTable}
+          selection={state.selectedOption}
+        />
       </Modal>
       <div className=' mt-2 font-sans text-sm flex flex-col gap-y-2'>
         <select
