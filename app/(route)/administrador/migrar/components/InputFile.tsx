@@ -6,7 +6,8 @@ import { toast } from "react-hot-toast";
 
 const InputFile = () => {
   const [fileName, setFileName] = useState("");
-  const [fileBinary, setFileBinary] = useState<ArrayBuffer | null>(null); // Define el tipo de fileBinary como ArrayBuffer | null
+  const [fileBinary, setFileBinary] = useState<ArrayBuffer | null>(null);
+  // Define el tipo de fileBinary como ArrayBuffer | null
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +45,7 @@ const InputFile = () => {
         .finally(() => {
           setIsLoading(false);
         });
+      setFileName("")
     } catch (error: any) {
       console.log(error);
     }

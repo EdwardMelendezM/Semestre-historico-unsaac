@@ -19,9 +19,7 @@ const Constituyentes = async () => {
         />
         <hr className="border-gray-300 mt-11 border-2" />
 
-        {
-          currentUser && <UserConstituyente currentUser={currentUser} />
-        }
+        <UserConstituyente currentUser={currentUser} />
       </div>
     </ClientOnly>
   );

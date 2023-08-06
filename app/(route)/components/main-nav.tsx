@@ -5,18 +5,21 @@ import Link from "next/link";
 import { cn } from "@/app/libs/utils";
 
 
-
+interface MainNavProps{
+  role: string | undefined | null
+  className:any
+}
 
 export function MainNav({
   className,
+  role,
   ...props
-}: React.HTMLAttributes<HTMLElement>) {
+}: MainNavProps ) {
 
-  const pathname = usePathname();
-  const params = useParams();
+  
   const router = useRouter()
 
-  const routes = [
+  const routesAdmin = [
     {
       href: `https://www.unsaac.edu.pe/`,
       label: 'Unsaac Oficial',
@@ -24,18 +27,27 @@ export function MainNav({
     {
       href: `http://ccomputo.unsaac.edu.pe/`,
       label: 'Centro de computo ',
-      active: pathname === `/${params.storeId}/billboards`
     },
     {
       href: `/administrador/historial`,
       label: 'Historial',
-      active: pathname === `/${params.storeId}/billboards`
+
     },
     {
       href: `/administrador/migrar`,
       label: 'Migrar base de datos',
-      active: pathname === `/${params.storeId}/billboards`
     }
+  ]
+
+  const routesUser = [
+    {
+      href: `https://www.unsaac.edu.pe/`,
+      label: 'Unsaac Oficial',
+    },
+    {
+      href: `http://ccomputo.unsaac.edu.pe/`,
+      label: 'Centro de computo ',
+    },
   ]
 
   return (
@@ -48,11 +60,23 @@ export function MainNav({
         className="hidden sm:block rounded-2xl h-16 pt-3 hover:cursor-pointer hover:opacity-80 transition"
         onClick={() => router.push("/")}
       />
-      {routes.map((route) => (
+
+      
+      {role==="admin"&& routesAdmin.map((route) => (
         <Link
           key={route.href}
           href={route.href}
-          className={cn('text-sm font-medium transition-colors hover:text-primary hover:opacity-80')}
+          className={cn(`text-sm font-medium transition-colors hover:text-primary hover:opacity-80 text-center`)}
+        >
+          {route.label}
+        </Link>
+      ))}
+
+      {role === "user" && routesUser.map((route) => (
+        <Link
+          key={route.href}
+          href={route.href}
+          className={cn(`text-sm font-medium transition-colors hover:text-primary hover:opacity-80 text-center`)}
         >
           {route.label}
         </Link>

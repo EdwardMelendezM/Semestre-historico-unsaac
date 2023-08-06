@@ -1,9 +1,22 @@
 import Heading from "@/app/components/Heading";
 import prismadb  from "@/app/libs/prismadb"
 import SearchHistorial from "./components/SearchHistorial";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import EmptyState from "@/app/components/EmptyState";
 
 
 const ConstituyentePage = async ()=> {
+  
+  const currentUser = await getCurrentUser();
+
+  if(currentUser?.role !== "admin"){
+    return (
+      <EmptyState
+        title="No tienes accesso a historial"
+        subtitle="Solo administradores pueden usar esto"
+      />
+    )
+  }
   
   return (
     <>

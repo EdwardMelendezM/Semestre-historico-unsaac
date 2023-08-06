@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import Navbar from './components/navbar'
 import getCurrentUser from '../actions/getCurrentUser'
 import ClientOnly from '../components/ClientOnly'
+import ToasterContext from '../context/ContextToast'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,12 +19,12 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const currentUser = await getCurrentUser();
-  console.log(currentUser)
   return (
     <html lang="en">
       <body className={inter.className}>
         <ClientOnly>
-          <Navbar />
+          <ToasterContext />
+          <Navbar role={currentUser?.role} />
         </ClientOnly>
           {children}
       </body>

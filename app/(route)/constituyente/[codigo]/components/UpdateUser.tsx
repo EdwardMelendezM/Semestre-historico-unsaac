@@ -87,13 +87,13 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
     <div className="mt-11 px-8 py-6 flex flex-col gap-y-4 items-center justify-center">
       <div className="relative">
 
-        <div className="w-60 h-60  overflow-hidden rounded-[100%]">
+        <div className="w-56 h-56 overflow-hidden rounded-[100%] flex items-center justify-center ">
           <Image
-            src={image || currentUser?.image || "/images/placeholder.jpg"}
+            src={currentUser?.image || "/images/placeholder.jpg"}
             alt="placeholbeder"
-            width={"244"}
-            height={"244"}
-            className="rounded-full bg-cover bg-center"
+            width={"300"}
+            height={"300"}
+            className="h-full w-full object-cover"
           />
         </div>
         
@@ -107,7 +107,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ currentUser }) => {
             alt="placeholbeder"
             width={"48"}
             height={"48"}
-            className="rounded-full bg-slate-400 p-2 absolute bottom-0 right-0 hover:cursor-pointer hover:bg-slate-300 transition bg-cover"
+            className="rounded-full bg-slate-400 p-2 absolute bottom-5 right-5 hover:cursor-pointer hover:bg-slate-300 transition bg-cover"
           />
         </CldUploadButton>
         

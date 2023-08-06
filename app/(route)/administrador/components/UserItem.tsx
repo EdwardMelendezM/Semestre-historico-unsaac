@@ -24,7 +24,7 @@ const UserItem: React.FC<UserItemProps> = ({
           className="border-full p-2"
         /> */}
         <h2 className="text-xl text-center text-gray-600 font-bold" >{ user?.name }</h2>
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 mt-4">
           <div className="flex flex-col gap-y-2 items-center justify-center ">
             {
               user?.codigo && <div className="flex gap-x-2">
@@ -45,7 +45,7 @@ const UserItem: React.FC<UserItemProps> = ({
           <img
             src={user?.image ? user?.image : "/images/placeholder.jpg"}
             alt="logito"
-            className="w-48 h-48 rounded-full border-2 border-gray-500 " />
+            className="w-48 h-48 rounded-full border-2 border-gray-500 object-cover" />
         </div>
       </Modal>
       <div className="py-2 px-8 flex gap-x-8 justify-between" >

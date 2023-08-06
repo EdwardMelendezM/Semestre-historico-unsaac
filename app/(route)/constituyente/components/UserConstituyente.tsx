@@ -38,13 +38,13 @@ const UserConstituyente: React.FC<UserConstituyenteProps> = ({
     <div className="mt-11 px-8 py-6 grid grid-cols-1 lg:grid-cols-2">
       <div className="flex flex-col gap-y-4 items-center justify-center">
         <div className="relative">
-          <div className="w-44 h-44 overflow-hidden rounded-[100%]">
+          <div className="w-44 h-44 overflow-hidden rounded-[100%] flex items-center justify-center ">
             <Image
               src={currentUser?.image || "/images/placeholder.jpg"}
               alt="placeholbeder"
-              width={"244"}
-              height={"244"}
-              className="w-auto bg-cover"
+              width={"300"}
+              height={"300"}
+              className="h-full w-full object-cover"
             />
           </div>
           
