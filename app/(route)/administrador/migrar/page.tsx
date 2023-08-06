@@ -8,7 +8,6 @@ import EmptyState from "@/app/components/EmptyState";
 const ConstituyentePage = async ()=> {
 
   const currentUser = await getCurrentUser();
-  console.log(currentUser?.role)
   if (currentUser?.role !== "admin") {
     return (
     <EmptyState

@@ -3,8 +3,12 @@ import { useState } from "react";
 import axios from "axios";
 import Button from "@/app/components/Button";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import Modal from "@/app/components/Modal";
 
 const InputFile = () => {
+  const router = useRouter()
+  const [isOpen, setIsOpen] = useState(false);
   const [fileName, setFileName] = useState("");
   const [fileBinary, setFileBinary] = useState<ArrayBuffer | null>(null);
   // Define el tipo de fileBinary como ArrayBuffer | null
@@ -36,8 +40,9 @@ const InputFile = () => {
     try {
       setIsLoading(true);
       await axios.post(`/api/convertir/`, fileBinary, { responseType: 'arraybuffer' })
-        .then(response => {
+        .then(() => {
           toast.success("Subido exitosamente")
+          router.push("/administrador")
         })
         .catch(()=>{
           toast.error("Error, algo ha pasado")
@@ -53,13 +58,25 @@ const InputFile = () => {
 
 
   return ( 
-    <div>
+    <div className="relative">
+      
+      <Modal
+        isOpen={isOpen}
+        onClose={()=>setIsOpen(false)}
+      >
+        <img
+          src="/images/formatoAlumno.png"
+          alt="formato Alumno"
+          className="w-[200px] rounded-2xl object-cover"
+        />
+      </Modal>
+
       <form onSubmit={onSubmit}>
         <div className="text-gray-500 px-1 py-2 text-md font-bold">Migrar alumnos</div>
         <div className="mt-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2 " htmlFor="fileInput">
+          {/* <label className="block text-gray-700 text-sm font-bold mb-2 " htmlFor="fileInput">
             Alumnos
-          </label>
+          </label> */}
           <div className="relative">
             <input
               type="file"
@@ -84,13 +101,20 @@ const InputFile = () => {
             </div>
           </div>
         </div>
-        <div className="mt-3">
+        <div className="mt-3 flex gap-x-4 gap-y-2 flex-col sm:flex-row">
           <Button
             type="submit"
             secondary
             disabled={isLoading}
           >
             Subir
+          </Button>
+          <Button
+            secondary
+            disabled={isLoading}
+            onClick={()=>setIsOpen(true)}
+          >
+            Ver formato
           </Button>
         </div>
       </form>

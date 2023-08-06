@@ -57,7 +57,7 @@ export function MainNav({
       <img
         src="images/logoInfo.png"
         alt="Logo unsaac"
-        className="hidden sm:block rounded-2xl h-16 pt-3 hover:cursor-pointer hover:opacity-80 transition"
+        className="hidden sm:block rounded-2xl h-16 py-2 hover:cursor-pointer hover:opacity-80 transition"
         onClick={() => router.push("/")}
       />
 
@@ -66,7 +66,7 @@ export function MainNav({
         <Link
           key={route.href}
           href={route.href}
-          className={cn(`text-sm font-medium transition-colors hover:text-primary hover:opacity-80 text-center`)}
+          className={cn(`text-sm sm:text-lg font-medium transition-colors hover:text-primary hover:opacity-80 text-center`)}
         >
           {route.label}
         </Link>
@@ -76,7 +76,7 @@ export function MainNav({
         <Link
           key={route.href}
           href={route.href}
-          className={cn(`text-sm font-medium transition-colors hover:text-primary hover:opacity-80 text-center`)}
+          className={cn(`text-sm sm:text-lg font-medium transition-colors hover:text-primary hover:opacity-80 text-center`)}
         >
           {route.label}
         </Link>

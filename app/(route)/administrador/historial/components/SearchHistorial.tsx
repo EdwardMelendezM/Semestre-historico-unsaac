@@ -24,7 +24,6 @@ const SearchHistorial = () => {
       await axios.get(`/api/historial/${codigo}`)
       .then(response=>{
         setHistorial(response.data)
-        console.log(response.data)
       })
       .finally(()=>{
         setIsLoading(false)
