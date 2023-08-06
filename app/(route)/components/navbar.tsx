@@ -3,27 +3,22 @@
 import { signOut } from "next-auth/react";
 import { MainNav } from "./main-nav";
 import Button from "@/app/components/Button";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
-const Navbar = () => {
-  const router = useRouter()
+interface NavbarProps{
+  role:string | undefined | null
+}
 
-  // const [isMounted, setIsMounted] = useState(false);
-
-  // useEffect(()=>{
-  //   setIsMounted(true)
-  // },[])
-
-  // if(!isMounted) return null
+const Navbar: React.FC<NavbarProps> = ({
+  role
+}) => {
 
   return (
-    <div className="border-b">
+    <div className="border-b bg-[#3341c5]">
       <div className="flex h-16 items-center px-4">
-        <MainNav className="mx-6" />
+        <MainNav role={role} className="mx-6" />
         <div className="ml-auto flex items-center space-x-4">
           <Button
-            secondary
+            danger
             onClick={() => {
               signOut()
               }}>

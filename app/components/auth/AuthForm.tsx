@@ -65,7 +65,7 @@ const AuthForm = () => {
       sm:max-w-md
     ">
       <div className="
-        bg-white
+        bg-[rgba(255,255,255,0.9)]
         px-4
         py-8
         shadow
@@ -78,12 +78,12 @@ const AuthForm = () => {
         >
           <Input
             id="email"
-            label="Codigo"
+            label="Código"
             type="text"
             register={register}
             errors={errors}
             disabled={isLoading}
-
+            placeholder="Ingrese su codigo institucional"
           />
           <Input
             id="password"
@@ -92,6 +92,7 @@ const AuthForm = () => {
             register={register}
             errors={errors}
             disabled={isLoading}
+            placeholder="Ingrese su contraseña"
 
           />
           <div>

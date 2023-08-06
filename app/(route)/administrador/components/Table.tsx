@@ -5,9 +5,10 @@ import convertTableToPdf from "../../../helpers/convertTableToPdf"
 
 interface TableProps{
   data:any
+  selection:string
 }
 
-const Table: React.FC<TableProps> = ({data}) => {
+const Table: React.FC<TableProps> = ({ data, selection }) => {
   
 
   const [isMounted, setIsMounted] = useState(false);
@@ -62,7 +63,11 @@ const Table: React.FC<TableProps> = ({data}) => {
                 <div className="text-sm text-gray-900">{row?.user?.estadoAlumno}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">Matriculado</div>
+                <div className="text-sm text-gray-900">
+                  {
+                    row?.user?.estadoAlumno==="graduando" && selection==="2023-I" ? "Matriculado" :"No matriculado"
+                  }
+                </div>
               </td>
             </tr>
           ))}

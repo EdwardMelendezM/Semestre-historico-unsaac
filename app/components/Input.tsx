@@ -29,8 +29,11 @@ const Input: React.FC<InputProps> = ({
   errors,
   disabled,
   placeholder,
-  value
+  value,
+
 }) => {
+
+
 
   return (
     <div className='flex flex-col'>
@@ -38,7 +41,7 @@ const Input: React.FC<InputProps> = ({
         htmlFor={id}
         className='
           block
-          text-sm
+          text-lg
           font-medium
           leading-6
           text-gray-900
@@ -54,6 +57,7 @@ const Input: React.FC<InputProps> = ({
           type={type}
           autoComplete={id}
           disabled={disabled}
+          
           {...register(id, { required })}
           className={clsx(`
             px-3
