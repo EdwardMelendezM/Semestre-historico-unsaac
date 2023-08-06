@@ -40,7 +40,7 @@ export function MainNav({
 
   const routesUser = [
     {
-      href: `/constituyentes`,
+      href: `/constituyente`,
       label: 'Inicio',
     },
     {
