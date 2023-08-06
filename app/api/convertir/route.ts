@@ -2,7 +2,6 @@ import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 import xlsx from 'xlsx';
 import bcrypt from "bcrypt";
-import { json } from "stream/consumers";
 interface UserExcelData {
   name:string;
   codigo:string;
@@ -18,13 +17,13 @@ export async function POST(request: Request) {
   try {
     const archivoBuffer = await request.arrayBuffer();
     const archivoUint8Array = new Uint8Array(archivoBuffer);
+    console.log(archivoUint8Array)
     const workbook = xlsx.read(archivoUint8Array);
     const hoja = workbook.Sheets['Hoja 1'];
-    console.log(hoja)
    
 
     const datosJson = xlsx.utils.sheet_to_json<UserExcelData>(hoja);
-    console.log(datosJson)
+
     for (const dato of datosJson) {
       const hashedPassword = await bcrypt.hash(String(dato.password), 12);
       const body =await prisma.user.create({
