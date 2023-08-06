@@ -21,25 +21,28 @@ export function MainNav({
 
   const routesAdmin = [
     {
-      href: `https://www.unsaac.edu.pe/`,
-      label: 'Unsaac Oficial',
+      href: `/administrador`,
+      label: 'Inicio',
+    },
+    {
+      href: `/administrador/historial`,
+      label: 'Historial',
+    },
+    {
+      href: `/administrador/migrar`,
+      label: 'Migrar base de datos',
     },
     {
       href: `http://ccomputo.unsaac.edu.pe/`,
       label: 'Centro de computo ',
     },
-    {
-      href: `/administrador/historial`,
-      label: 'Historial',
-
-    },
-    {
-      href: `/administrador/migrar`,
-      label: 'Migrar base de datos',
-    }
   ]
 
   const routesUser = [
+    {
+      href: `/constituyentes`,
+      label: 'Inicio',
+    },
     {
       href: `https://www.unsaac.edu.pe/`,
       label: 'Unsaac Oficial',

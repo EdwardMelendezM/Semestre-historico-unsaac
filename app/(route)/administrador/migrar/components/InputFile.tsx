@@ -38,6 +38,10 @@ const InputFile = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      if (!fileName){
+        toast.error("Algo ha sucedo mal")
+        return
+      }
       setIsLoading(true);
       await axios.post(`/api/convertir/`, fileBinary, { responseType: 'arraybuffer' })
         .then(() => {
