@@ -1,8 +1,5 @@
-import { NextResponse } from "next/server";
-
-import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
-import { empty } from "@prisma/client/runtime/library";
+
 
 export async function POST(
   request: Request,
@@ -16,18 +13,6 @@ export async function POST(
   try {
     const { codigo } = params;
     const body = await request.json();
-    console.log(body)
-    const {
-      name,
-      image,
-      grados,
-      cargo,
-      lugar,
-      fechaGrado,
-      fechaCapacitacion,
-      lugarCapacitacion,
-      denominacioncapacitacion,
-    } = body;
     const originalUser = await prisma.user.findUnique({
       where: { codigo: codigo },
     });

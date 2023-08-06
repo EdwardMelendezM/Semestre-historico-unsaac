@@ -2,7 +2,6 @@ import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 import xlsx from 'xlsx';
 import bcrypt from "bcrypt";
-import { json } from "stream/consumers";
 interface UserExcelData {
   name:string;
   codigo:string;

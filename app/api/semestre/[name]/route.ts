@@ -20,7 +20,8 @@ export async function POST(
     const createSemestre = await prisma.semestre.create({
       data:{
         name:params.name,
-        alumnosCodigo
+        alumnosCodigo,
+
       }
     })
     
@@ -44,7 +45,6 @@ export async function GET(
 
 
   try {
-    console.log(params.name)
     const semestres = await prisma.semestre.findMany({
       where:{
         name: params.name
