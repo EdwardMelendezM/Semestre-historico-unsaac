@@ -30,6 +30,11 @@ export function MainNav({
       href: `/administrador/historial`,
       label: 'Historial',
       active: pathname === `/${params.storeId}/billboards`
+    },
+    {
+      href: `/administrador/migrar`,
+      label: 'Migrar base de datos',
+      active: pathname === `/${params.storeId}/billboards`
     }
   ]
 
