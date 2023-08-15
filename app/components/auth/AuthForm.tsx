@@ -10,7 +10,6 @@ import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation';
 
 
-//@ts-ignore
 const AuthForm = () => {
   const session = useSession() || null
   const router = useRouter()
@@ -19,7 +18,7 @@ const AuthForm = () => {
   useEffect(() => {
     if (session?.status === 'authenticated') {
       router.refresh()
-      router.push('/administrador')
+      router.push('/')
     }
   }, [session?.status, router])
 
@@ -51,7 +50,7 @@ const AuthForm = () => {
         }
         if (callback?.ok && !callback?.error) {
           toast.success('¡Entro correctamente!')
-          router.push('/administrador')
+          router.push('/')
         }
       })
       .finally(() => setIsLoading(false))

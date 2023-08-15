@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Navbar from './components/navbar'
 import getCurrentUser from '../actions/getCurrentUser'
+import Navbar from './components/navbar'
 import ClientOnly from '../components/ClientOnly'
 import ToasterContext from '../context/ContextToast'
-import AuthContext from '../context/AuthContext'
-
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,18 +17,24 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const currentUser = await getCurrentUser();
+  
+  const currentUser = await getCurrentUser()
+
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <ClientOnly>
         <ToasterContext />
-        <ClientOnly>
-          <AuthContext>
-            <Navbar role={currentUser?.role} />
-          </AuthContext>
-        </ClientOnly>
-          {children}
+        {
+          currentUser && <Navbar
+            role={currentUser.role}
+          />
+        }
+      </ClientOnly>
+      <body className={inter.className}>
+        {children}
       </body>
+      
     </html>
   )
 }

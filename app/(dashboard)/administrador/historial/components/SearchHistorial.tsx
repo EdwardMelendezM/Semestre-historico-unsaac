@@ -69,10 +69,18 @@ const SearchHistorial = () => {
       <div className="px-6 py-6">
         {
           historial.length===0 ? (
-            <EmptyState
-              title="No se encontro"
-              subtitle="Intenta buscar con otro codigo de constituyente"
-            />
+            !isLoading && (
+              <EmptyState
+                title="No se encontro"
+                subtitle="Intenta buscar con otro codigo de constituyente"
+              />
+            ) ||
+            isLoading && (
+              <EmptyState
+                title="Cargando..."
+                subtitle="Buscando constituyentes"
+              />
+            )
           ) : (
               <TableHistory data={historial} />
           )

@@ -6,7 +6,7 @@ import 'jspdf-autotable'
  * @param { string } format 
  * @param { string } filename El nombre del archivo con el que se va a descargar
  */
-const convertTableToPdf = (tableReference, filename = 'document', format) => {
+const convertTableToPdf = (tableReference:any, filename = 'document', format:any) => {
   const tableFormats = {
     1: 'striped',
     2: 'grid',
@@ -16,7 +16,7 @@ const convertTableToPdf = (tableReference, filename = 'document', format) => {
   // la tabla
   const table = tableReference.current
 
-  const doc = new jsPDF({ orientation: "landscape" })
+  const doc = new jsPDF({ orientation: "landscape" }) as any
 
   // automáticamente se genera la tabla
   

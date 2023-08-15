@@ -27,7 +27,6 @@ import EmptyState from "@/app/components/EmptyState";
         <EmptyState
           title="No autorizado"
           subtitle="Por favor, inicie sesion"
-
         />
       </ClientOnly>
     }
@@ -35,27 +34,21 @@ import EmptyState from "@/app/components/EmptyState";
     return (
       <ClientOnly>
         <div className="px-6 py-11">
-          {
-            currentUser && <Heading
-              // Aqui tiene que ir el rol
-              title={`${currentUser?.typeRole}`}
-              description="Acceso a buscar y consultar informacion de los constituyentes, y tambien informes"
-            />
-          }
-          {
-            alumnosSemestre && egresadosSemestre && graduadosSemestre && <Informes
+
+          <Heading
+            title={`${currentUser?.typeRole}`}
+            description="Acceso a buscar y consultar informacion de los constituyentes, y tambien informes"
+          />
+          <hr className="border-gray-400 mt-11" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+            <Informes
               alumnosSemestre={alumnosSemestre}
               egresadosSemestre={egresadosSemestre}
               graduadosSemestre={graduadosSemestre}
             />
-          }
-
-
-
-          <hr className="border-gray-300 mt-11 border-2" />
-          {
-            alumnos && <SearchUser role={currentUser?.role} data={alumnos} />
-          }
+            <SearchUser role={currentUser?.role} data={alumnos} />
+          </div>
+          
 
 
         </div>

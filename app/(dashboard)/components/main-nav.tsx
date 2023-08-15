@@ -3,6 +3,7 @@
 import { useParams, usePathname, useRouter } from "next/navigation"
 import Link from "next/link";
 import { cn } from "@/app/libs/utils";
+import Image from "next/image";
 
 
 interface MainNavProps{
@@ -57,9 +58,11 @@ export function MainNav({
     <nav
       className={cn('flex items-center space-x-4 lg:space-x-6', className)}
     >
-      <img
-        src="images/logoInfo.png"
+      <Image
+        src="/images/logoInfo.png"
         alt="Logo unsaac"
+        width={60}
+        height={60}
         className="hidden sm:block rounded-2xl h-16 py-2 hover:cursor-pointer hover:opacity-80 transition"
         onClick={() => router.push("/")}
       />

@@ -21,7 +21,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
               <div className='text-sm font-bold text-gray-700' >Tipo</div>
             </div>
             <ul>
-              {results.map((user:any) => (
+              {results.slice(0,7).map((user:any) => (
                 <UserItem key={user?.id} user={user} />
               ))}
             </ul>
@@ -29,7 +29,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
         )
         :
         <>
-          <div className="mt-11 text-center text-lg text-gray-600">
+          <div className="mt-11 text-center text-lg font-medium text-gray-400">
             No se encontro ningun usuario
           </div>
         </>

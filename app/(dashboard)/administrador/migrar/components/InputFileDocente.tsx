@@ -5,8 +5,11 @@ import Button from "@/app/components/Button";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Modal from "@/app/components/Modal";
+import Image from "next/image";
 
-const InputFile = () => {
+
+
+const InputFileDocente = () => {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
   const [fileName, setFileName] = useState("");
@@ -43,7 +46,7 @@ const InputFile = () => {
         return
       }
       setIsLoading(true);
-      await axios.post(`/api/convertir/`, fileBinary, { responseType: 'arraybuffer' })
+      await axios.post(`/api/convertir/docente/`, fileBinary, { responseType: 'arraybuffer' })
         .then(() => {
           toast.success("Subido exitosamente")
           router.push("/administrador")
@@ -68,15 +71,16 @@ const InputFile = () => {
         isOpen={isOpen}
         onClose={()=>setIsOpen(false)}
       >
-        <img
-          src="/images/formatoAlumno.png"
+        <Image
+          fill
+          src="/images/formatoDocente.png"
           alt="formato Alumno"
           className="rounded-2xl object-cover"
         />
       </Modal>
 
       <form onSubmit={onSubmit}>
-        <div className="text-gray-500 px-1 py-2 text-md font-bold">Migrar alumnos</div>
+        <div className="text-gray-500 px-1 py-2 text-md font-bold">Migrar docentes</div>
         <div className="mt-4">
           {/* <label className="block text-gray-700 text-sm font-bold mb-2 " htmlFor="fileInput">
             Alumnos
@@ -139,4 +143,4 @@ const InputFile = () => {
    );
 }
  
-export default InputFile;
+export default InputFileDocente;
