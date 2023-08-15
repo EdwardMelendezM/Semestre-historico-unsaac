@@ -8,6 +8,7 @@
   import getAlumnos from "@/app/actions/getAlumnos";
 import ClientOnly from "@/app/components/ClientOnly";
 import EmptyState from "@/app/components/EmptyState";
+import { redirect } from "next/navigation";
 
 
 
@@ -15,6 +16,10 @@ import EmptyState from "@/app/components/EmptyState";
   const DashboardAdmin = async () => {
 
     const currentUser = await getCurrentUser();
+
+    if (!currentUser) {
+      redirect("/login")
+    }
 
     const alumnosSemestre = await getAlumnosSemestre();
     const egresadosSemestre = await getEgresadosSemestre()

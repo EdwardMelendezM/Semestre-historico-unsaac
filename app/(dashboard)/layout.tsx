@@ -23,15 +23,16 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <ClientOnly>
-        <ToasterContext />
-        {
-          currentUser && <Navbar
-            role={currentUser.role}
-          />
-        }
-      </ClientOnly>
+      
       <body className={inter.className}>
+        <ClientOnly>
+          <ToasterContext />
+          {
+            currentUser && <Navbar
+              role={currentUser.role}
+            />
+          }
+        </ClientOnly>
         {children}
       </body>
       

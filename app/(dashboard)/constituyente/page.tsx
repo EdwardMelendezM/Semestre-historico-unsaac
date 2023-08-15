@@ -2,11 +2,16 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import Heading from "../components/heading";
 import UserConstituyente from "./components/UserConstituyente";
 import ClientOnly from "@/app/components/ClientOnly";
+import { redirect } from "next/navigation";
 
 
 const Constituyentes = async () => {
 
   const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    redirect("/login")
+  }
   
 
   return (
